@@ -5,52 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎧 RADIO CANNAFEST | En Vivo 24hs</title>
 
-<!-- ÍCONO Y MANIFEST PARA PWA -->
+<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="https://iili.io/fIqhMwQ.webp">
 <link rel="apple-touch-icon" href="https://iili.io/fIqhMwQ.webp">
 <meta name="theme-color" content="#00ff88">
 
+<!-- SEO / OG -->
+<meta name="description" content="Radio Cannafest en vivo 24hs. Música, cultura, pedidos musicales, difusión de emprendimientos y eventos.">
+<meta property="og:type" content="website">
 <meta property="og:title" content="RADIO CANNAFEST | En Vivo 24hs">
-<meta property="og:description" content="Música, cultura y vibra 420 en vivo.">
+<meta property="og:description" content="Música, cultura, pedidos musicales y espacio publicitario para emprendimientos.">
 <meta property="og:image" content="https://iili.io/fI0exVa.jpg">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght:300;400;600&family=Montserrat:wght:600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-/* FONT FACE para el título — usa Cannabis.ttf */
 @font-face {
   font-family: 'Cannabis';
   src: url('Cannabis.ttf') format('truetype');
   font-display: swap;
 }
 
+:root{
+  --bg:#04110b;
+  --card:rgba(0,0,0,.72);
+  --card2:rgba(0,0,0,.62);
+  --line:rgba(0,255,160,.22);
+  --glow:0 0 18px rgba(0,255,150,.25);
+  --txt:#d8fff0;
+  --muted:#a7d8c8;
+  --green:#00ff88;
+  --green2:#00cc66;
+  --cyan:#00d1ff;
+  --pink:#ff00aa;
+  --yellow:#ffe95b;
+  --red:#ff3b5f;
+  --radius:18px;
+  --container:1080px;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden}
 body{
   font-family:'Poppins',sans-serif;
-  background:url('https://iili.io/fzGgVlp.jpg') center/cover fixed no-repeat;
-  color:#00ff99;
+  background:
+    radial-gradient(900px 500px at 10% -5%, rgba(0,255,136,.08), transparent 60%),
+    radial-gradient(800px 400px at 90% 0%, rgba(0,209,255,.08), transparent 60%),
+    url('https://iili.io/fzGgVlp.jpg') center/cover fixed no-repeat;
+  color:var(--txt);
   text-align:center;
-  padding:20px;
-  overflow-x:hidden;
+  padding:18px 12px 24px;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+.container{
+  width:min(var(--container), calc(100% - 4px));
+  margin-inline:auto;
+}
+
+.glass{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--glow);
+  backdrop-filter:blur(8px);
+}
+
+.section{
+  margin-top:18px;
+  padding:16px;
+  text-align:left;
+}
+
+.section h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:1.15rem;
+  color:#fff;
+  margin-bottom:6px;
+}
+.section .section-sub{
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.45;
+}
+
+.grid{
+  display:grid;
+  gap:12px;
 }
 
 /* TOP INFO */
 .top-info{
-  max-width:500px;
-  margin:5px auto 15px;
-  padding:8px 15px;
+  max-width:680px;
+  margin:0 auto 14px;
+  padding:10px 14px;
   background:rgba(0,0,0,.55);
   border-radius:12px;
-  box-shadow:0 0 10px rgba(0,255,150,0.40);
+  border:1px solid rgba(0,255,136,.15);
+  box-shadow:0 0 10px rgba(0,255,150,0.28);
 }
-.clima-line{font-size:0.95em;color:#00ff99;text-shadow:0 0 6px #00ff99;}
-.hora-line{font-size:0.9em;color:#fff;opacity:.85}
+.clima-line{font-size:.95rem;color:#00ff99;text-shadow:0 0 6px #00ff99;}
+.hora-line{font-size:.88rem;color:#fff;opacity:.88}
 
-/* LOGO */
+/* HERO RADIO */
+.radio-box{
+  padding:22px 16px 18px;
+  max-width:900px;
+  margin:0 auto;
+  border-radius:22px;
+  background:rgba(0,0,0,.74);
+  border:1px solid rgba(0,255,150,.18);
+  box-shadow:0 0 24px rgba(0,255,150,.20);
+}
 .logo{
   width:260px;
-  margin:10px auto 0;
+  margin:0 auto 4px;
   display:block;
   animation:logoNeon 3s infinite ease-in-out;
 }
@@ -61,24 +132,22 @@ body{
   100%{filter:drop-shadow(0 0 10px #ffff33)}
 }
 
-/* TÍTULO con fuente Cannabis */
 .title{
-  font-family: 'Cannabis', sans-serif;
-  font-size:2.2em;
+  font-family:'Cannabis',sans-serif;
+  font-size:2rem;
   font-weight:600;
-  margin-top:3px;
+  margin-top:2px;
   color:#00ffcc;
-  text-shadow:0 0 12px #00ff88,0 0 22px #00ffaa;
+  text-shadow:0 0 12px #00ff88, 0 0 20px #00ffaa;
+  line-height:1.08;
 }
 
-/* MARQUEE (texto deslizable) */
 .marquee{
   width:100%;
   overflow:hidden;
   white-space:nowrap;
-  box-sizing:border-box;
-  margin-top:15px;
-  font-size:1.15em;
+  margin-top:12px;
+  font-size:1.02rem;
   font-weight:600;
   color:#00ff88;
   text-shadow:0 0 10px #00ff88;
@@ -86,365 +155,496 @@ body{
 .marquee span{
   display:inline-block;
   padding-left:100%;
-  animation:scroll-left 10s linear infinite;
+  animation:scroll-left 13s linear infinite;
 }
 @keyframes scroll-left{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-100%);}
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-100%)}
 }
 
-/* EN VIVO */
 .en-vivo{
   display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,0,0,.25);border:1px solid #ff0033;
-  padding:6px 18px;border-radius:25px;
-  color:#ff3355;font-weight:700;margin:10px auto 8px;
-  box-shadow:0 0 10px #ff0033;
+  background:rgba(255,0,0,.16);
+  border:1px solid rgba(255,0,60,.55);
+  padding:6px 14px;
+  border-radius:999px;
+  color:#ff5d78;
+  font-weight:700;
+  margin:10px auto 8px;
+  box-shadow:0 0 10px rgba(255,0,60,.22);
 }
 .en-vivo .dot{
   width:10px;height:10px;border-radius:50%;background:#ff0033;
   animation:pulse 1s infinite;
 }
 @keyframes pulse{
- 0%{transform:scale(.9);opacity:.6}
- 50%{transform:scale(1.4);opacity:1}
- 100%{transform:scale(.9);opacity:.6}
+  0%{transform:scale(.9);opacity:.6}
+  50%{transform:scale(1.4);opacity:1}
+  100%{transform:scale(.9);opacity:.6}
 }
 
-/* OYENTES DINÁMICOS */
-.listeners-box{
-  margin:6px auto 12px;
+/* QUICK STATS / NOW */
+.hero-mini-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:12px 0 10px;
+}
+.mini-card{
+  background:rgba(0,0,0,.42);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:10px;
+  text-align:left;
+}
+.mini-label{
+  color:var(--muted);
+  font-size:.75rem;
+  margin-bottom:4px;
+}
+.mini-value{
+  color:#fff;
+  font-weight:700;
+  line-height:1.15;
+  font-size:.95rem;
+}
+.oyentes-num{
+  color:var(--green);
+  text-shadow:0 0 10px rgba(0,255,136,.35);
+  font-weight:700;
+  font-size:1.1rem;
+}
+
+audio{width:100%;max-width:580px}
+
+/* BUTTONS */
+.btn-row{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+  margin-top:12px;
+}
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:12px 18px;
+  font-weight:700;
+  font-size:.98rem;
+  cursor:pointer;
+  transition:transform .16s ease, box-shadow .2s ease, opacity .2s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.play-btn{
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#001d10;
+  box-shadow:0 0 14px rgba(0,255,136,.30);
+}
+.share-btn{
+  background:linear-gradient(135deg,#00ccff,#0088ff);
+  color:#fff;
+  box-shadow:0 0 14px rgba(0,170,255,.28);
+}
+.btn-wa{
+  background:linear-gradient(135deg,#2cf37b,#18bf5b);
+  color:#062413;
+  box-shadow:0 0 14px rgba(37,211,102,.28);
+}
+.btn-outline{
+  background:rgba(255,255,255,.03);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+}
+
+#playerStatus{
+  color:#fff;
+  margin-top:10px;
+  opacity:.9;
+  font-size:.95rem;
+}
+
+/* INSTALL BTN */
+#installBtn{
+  background:#00ff88;
+  color:#000;
+  padding:11px 20px;
+  border-radius:999px;
+  font-size:1rem;
+  border:none;
+  margin-top:12px;
+  cursor:pointer;
+  display:none;
+  box-shadow:0 0 12px #00ff88;
+  font-weight:700;
+}
+
+/* FORM PEDI TU TEMA */
+.request-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+.field{
+  text-align:left;
+}
+.field label{
+  display:block;
+  color:#fff;
+  font-size:.86rem;
+  margin-bottom:6px;
+}
+.field input,.field textarea{
+  width:100%;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  padding:12px;
+  outline:none;
+  font-family:inherit;
+  font-size:.95rem;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.45)}
+.field textarea{resize:vertical;min-height:100px}
+.full{grid-column:1/-1}
+.helper{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.85rem;
+  line-height:1.35;
+}
+
+/* ULTIMOS PEDIDOS */
+.pedidos-list{
+  margin-top:12px;
+  display:grid;
+  gap:8px;
+}
+.pedido-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  border-radius:12px;
+  padding:10px 12px;
+}
+.pedido-item .left{
+  min-width:0;
+}
+.pedido-item strong{
+  display:block;
+  font-size:.92rem;
+  color:#fff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.pedido-item span{
+  color:var(--muted);
+  font-size:.82rem;
+}
+.badge-live{
+  font-size:.73rem;
+  color:#0f2;
+  border:1px solid rgba(0,255,136,.22);
+  background:rgba(0,255,136,.06);
+  border-radius:999px;
+  padding:4px 8px;
+  white-space:nowrap;
+}
+
+/* PROGRAMACION / COMO PARTICIPAR / SOBRE */
+.cards-3{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.cards-4{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.info-card{
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+  border-radius:14px;
+  padding:12px;
+}
+.info-card h3{
+  font-size:.96rem;
+  margin-bottom:6px;
+  color:#fff;
+}
+.info-card p{
+  color:var(--muted);
+  line-height:1.4;
+  font-size:.86rem;
+}
+.kpi{
+  border:1px solid rgba(0,255,136,.15);
+  background:rgba(0,255,136,.04);
+  border-radius:14px;
+  padding:12px;
+  text-align:left;
+}
+.kpi strong{
+  display:block;
+  color:var(--green);
+  font-size:1.1rem;
+}
+.kpi span{
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+/* EVENTO DESTACADO */
+.feature-event{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:12px;
+  align-items:stretch;
+}
+.feature-image{
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background:#020202;
+}
+.feature-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+}
+.feature-body{
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  border-radius:16px;
+  padding:14px;
+}
+.feature-tag{
+  display:inline-block;
+  color:#111;
+  background:linear-gradient(135deg,#ffe95b,#ffbf3b);
+  border-radius:999px;
+  padding:5px 10px;
+  font-weight:700;
+  font-size:.78rem;
+  margin-bottom:10px;
+}
+.feature-body h3{
+  color:#fff;
+  font-size:1.02rem;
+  line-height:1.2;
+  margin-bottom:8px;
+}
+.feature-body p{
+  color:var(--muted);
+  line-height:1.45;
+  font-size:.88rem;
+  margin-bottom:8px;
+}
+.event-meta{
+  display:grid;
+  gap:6px;
+  margin:10px 0 0;
+}
+.event-meta div{
+  color:#dffef2;
+  font-size:.86rem;
+}
+
+/* MARCAS CAROUSEL */
+.brands-track{
+  margin-top:12px;
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:4px;
+}
+.brands-track::-webkit-scrollbar{height:8px}
+.brands-track::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.14);
+  border-radius:999px;
+}
+.brand-card{
+  min-width:min(310px, 88vw);
+  scroll-snap-align:start;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.brand-img{
+  aspect-ratio:1.2/1;
+  background:#060606;
+  border-bottom:1px solid rgba(255,255,255,.06);
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
+  padding:8px;
 }
-.listeners-chip{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(0,255,136,.10);
-  border:1px solid rgba(0,255,136,.35);
-  box-shadow:0 0 10px rgba(0,255,136,.15);
-  color:#d7ffef;
-  font-weight:600;
+.brand-img img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
-.listeners-chip .pulse-eye{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#00ff88;
-  box-shadow:0 0 10px #00ff88;
-  animation:listenerPulse 1.8s infinite ease-in-out;
+.brand-body{
+  padding:12px;
+  display:grid;
+  gap:6px;
 }
-@keyframes listenerPulse{
-  0%,100%{transform:scale(.9);opacity:.7}
-  50%{transform:scale(1.25);opacity:1}
-}
-#listenersCount{
-  color:#00ff88;
-  font-weight:700;
-  min-width:38px;
-  display:inline-block;
-  text-align:right;
-}
-.listeners-sub{
+.brand-body h3{
+  font-size:1rem;
   color:#fff;
-  opacity:.78;
-  font-size:.9em;
+}
+.brand-body p{
+  color:var(--muted);
+  font-size:.86rem;
+  line-height:1.4;
 }
 
-/* CAJA RADIO */
-.radio-box{
-  background:rgba(0,0,0,.70);
-  padding:35px 28px;
-  border-radius:22px;
-  max-width:650px;
-  margin:25px auto;
-  box-shadow:0 0 18px rgba(0,255,150,0.30);
-  border:2px solid rgba(0,255,150,0.25);
+/* PAUTA */
+.pauta-grid{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:12px;
 }
-
-/* BOTONES */
-.play-btn{
-  margin-top:20px;
-  background:linear-gradient(135deg,#00ff88,#00cc66);
-  padding:15px 50px;
-  border:none;border-radius:50px;
-  font-size:1.3em;
-  color:#000;font-weight:600;
-  box-shadow:0 0 12px #00ff88;
-  cursor:pointer;
-  transition:transform .2s ease;
+.list{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
 }
-.play-btn:hover{transform:scale(1.08)}
-
-.share-btn{
-  margin-top:15px;
-  background:linear-gradient(135deg,#00ccff,#0088ff);
-  padding:12px 40px;
-  border:none;border-radius:50px;
-  font-size:1.1em;
-  color:#fff;font-weight:600;
-  box-shadow:0 0 12px #00aaff;
-  cursor:pointer;
-  transition:transform .2s ease;
+.list .li{
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+  border-radius:12px;
+  padding:10px 12px;
+  color:var(--txt);
+  font-size:.9rem;
 }
-.share-btn:hover{transform:scale(1.08)}
+.price-box{
+  border:1px dashed rgba(0,255,136,.28);
+  background:rgba(0,255,136,.04);
+  border-radius:14px;
+  padding:12px;
+}
+.price-box h4{
+  color:#fff;
+  margin-bottom:6px;
+}
+.price-box p{
+  color:var(--muted);
+  line-height:1.45;
+  font-size:.88rem;
+}
 
 /* INSTAGRAM */
 .insta-box{
-  margin-top:45px;
-  padding:25px 20px;
+  padding:18px 16px;
   border-radius:20px;
-  max-width:600px;
-  background:rgba(0,0,0,.8);
-  box-shadow:0 0 18px #ff00aa;
-  margin-left:auto;
-  margin-right:auto;
+  max-width:900px;
+  background:rgba(0,0,0,.82);
+  box-shadow:0 0 18px rgba(255,0,170,.22);
+  border:1px solid rgba(255,0,170,.16);
+  margin:18px auto 0;
   text-align:center;
 }
 .insta-title{
-  font-size:1.8em;
-  color:#ff00aa;
-  margin-bottom:10px;
+  font-size:1.35rem;
+  color:#ff4fc4;
+  margin-bottom:8px;
+  font-family:'Montserrat',sans-serif;
 }
 .insta-link{
   color:#fff;
   text-decoration:none;
-  font-size:1.2em;
+  font-size:1.05rem;
   display:inline-flex;
   align-items:center;
   gap:10px;
   justify-content:center;
 }
 .insta-logo{
-  width:30px;
+  width:28px;
   filter:drop-shadow(0 0 8px #ff00aa);
 }
-
-/* ===== NUEVO: SECCIÓN EMPRENDIMIENTOS / SPOTS ===== */
-.spots-wrap{
-  margin-top:28px;
-  max-width:950px;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:left;
-}
-.section-neon{
-  background:rgba(0,0,0,.78);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 0 18px rgba(0,255,150,.18);
-  border:1px solid rgba(0,255,150,.18);
-}
-.section-neon + .section-neon{
-  margin-top:18px;
-}
-.section-title{
-  text-align:center;
-  font-family:'Montserrat', sans-serif;
-  font-size:1.35em;
-  color:#00ffcc;
-  text-shadow:0 0 8px rgba(0,255,170,.6);
-  margin-bottom:8px;
-}
-.section-sub{
-  text-align:center;
-  color:#fff;
-  opacity:.9;
-  margin-bottom:14px;
-  font-size:.95em;
-  line-height:1.4;
-}
-
-/* Carrusel horizontal */
-.spots-scroller{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  padding:4px 2px 10px;
-  scroll-snap-type:x proximity;
-  -webkit-overflow-scrolling:touch;
-}
-.spots-scroller::-webkit-scrollbar{height:8px}
-.spots-scroller::-webkit-scrollbar-track{background:rgba(255,255,255,.08);border-radius:20px}
-.spots-scroller::-webkit-scrollbar-thumb{background:rgba(0,255,136,.45);border-radius:20px}
-
-.spot-card{
-  flex:0 0 310px;
-  scroll-snap-align:start;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(0,255,136,.18);
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 0 14px rgba(0,255,136,.08);
-  display:flex;
-  flex-direction:column;
-}
-.spot-img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  display:block;
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.spot-body{
-  padding:12px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.spot-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  width:max-content;
-  max-width:100%;
-  padding:5px 10px;
-  border-radius:999px;
-  font-size:.78em;
-  color:#d7ffef;
-  border:1px solid rgba(0,255,136,.25);
-  background:rgba(0,255,136,.08);
-}
-.spot-title{
-  color:#fff;
-  font-weight:700;
-  font-size:1.02em;
-  line-height:1.25;
-}
-.spot-text{
-  color:#e9fff8;
-  opacity:.9;
-  font-size:.9em;
-  line-height:1.4;
-  min-height:56px;
-}
-.spot-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-.spot-meta span{
-  color:#cffff0;
-  font-size:.77em;
-  padding:4px 8px;
-  border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.09);
-}
-.spot-actions{
-  display:flex;
-  gap:8px;
-  margin-top:2px;
-}
-.spot-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  text-decoration:none;
-  border:none;
-  border-radius:999px;
-  padding:10px 14px;
-  font-size:.9em;
-  font-weight:600;
-  cursor:pointer;
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.spot-btn:hover{transform:translateY(-1px)}
-.spot-btn.ig{
-  background:linear-gradient(135deg,#ff3ea5,#b400ff);
-  color:#fff;
-  box-shadow:0 0 12px rgba(255,0,170,.25);
-}
-.spot-btn.secondary{
-  background:rgba(255,255,255,.06);
-  color:#fff;
-  border:1px solid rgba(255,255,255,.12);
-}
-
-/* Bloque pauta */
-.ads-box{
-  text-align:center;
-}
-.ads-box h3{
-  color:#00ffcc;
-  font-size:1.25em;
-  margin-bottom:8px;
-  text-shadow:0 0 8px rgba(0,255,170,.45);
-}
-.ads-box p{
-  color:#fff;
-  opacity:.92;
-  line-height:1.45;
-  font-size:.95em;
-  max-width:700px;
-  margin:0 auto 14px;
-}
-.ads-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  padding:12px 18px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#25D366,#13b851);
-  color:#042113;
-  font-weight:700;
-  text-decoration:none;
-  box-shadow:0 0 14px rgba(37,211,102,.35);
-  transition:transform .2s ease;
-}
-.ads-cta:hover{transform:scale(1.03)}
-.ads-note{
-  margin-top:10px;
-  color:#d9fff0;
-  opacity:.75;
-  font-size:.84em;
+.insta-sub{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.9rem;
 }
 
 /* FOOTER */
 .footer-ciborg{
-  margin-top:55px;
-  padding:12px 0;
-  background:rgba(0,0,0,0.55);
-  border-radius:10px;
+  margin-top:20px;
+  padding:12px 10px;
+  background:rgba(0,0,0,.55);
+  border-radius:12px;
   color:#00ffcc;
   font-weight:600;
-  font-size:1.15em;
+  font-size:1rem;
   text-decoration:none;
   display:block;
   width:100%;
-  max-width:600px;
+  max-width:900px;
   margin-left:auto;
   margin-right:auto;
-  box-shadow:0 0 12px #00ffaa;
+  box-shadow:0 0 12px rgba(0,255,170,.22);
+  border:1px solid rgba(0,255,170,.14);
 }
 
+/* FLOATING WAPP */
+.floating-wa{
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  z-index:50;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#25D366;
+  box-shadow:0 10px 24px rgba(37,211,102,.35);
+  border:1px solid rgba(255,255,255,.2);
+}
+.floating-wa svg{width:28px;height:28px;fill:#fff;display:block}
+
 /* RESPONSIVE */
-@media(max-width:480px){
+@media (max-width:980px){
+  .feature-event,
+  .pauta-grid{grid-template-columns:1fr}
+  .cards-3{grid-template-columns:1fr 1fr}
+  .cards-4{grid-template-columns:1fr 1fr}
+  .hero-mini-grid{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .request-grid{grid-template-columns:1fr}
+  .cards-3,
+  .cards-4{grid-template-columns:1fr}
   .logo{width:220px}
-  .title{font-size:1.7em;margin-top:6px}
-  .radio-box{padding:25px 14px}
-  .play-btn{padding:13px 20px;font-size:1.06em;width:100%}
-  .share-btn{padding:11px 16px;font-size:1em;width:100%}
-  .spot-card{flex-basis:84vw}
-  .spot-img{height:160px}
+  .title{font-size:1.65rem}
+  .pedido-item{align-items:flex-start;flex-direction:column}
+  .btn-row .btn{width:100%}
+  .radio-box{padding:18px 12px 16px}
+  .section{padding:14px}
 }
-@media(max-width:800px){
-  .logo{width:240px}
-}
-@media(min-width:1200px){
+@media (min-width:1200px){
   .logo{width:300px}
-  .title{font-size:2.4em;margin-top:4px}
-}
-@media(min-width:1600px){
-  .logo{width:330px}
+  .title{font-size:2.25rem}
 }
 </style>
 </head>
@@ -458,54 +658,285 @@ body{
   <div class="hora-line" id="fecha"></div>
 </div>
 
-<!-- RADIO -->
+<!-- HERO / RADIO -->
 <div class="radio-box">
-
   <img src="https://iili.io/fIqhMwQ.webp" class="logo" alt="Logo Radio Cannafest">
 
   <h1 class="title">Música que fluye. Vibra que conecta.</h1>
 
-  <!-- MARQUEE -->
   <div class="marquee">
-    <span>🎧👽Música – Cultura – Vibra – 24hs • Radio Cannafest🔴🟡🟢</span>
+    <span>🎧 Música • Cultura • Comunidad • Pedí tu tema por WhatsApp • Pautá tu emprendimiento en Radio Cannafest 🔴🟡🟢</span>
   </div>
 
   <div class="en-vivo"><div class="dot"></div> EN VIVO</div>
 
-  <!-- NUEVO: OYENTES DINÁMICOS -->
-  <div class="listeners-box">
-    <div class="listeners-chip">
-      <span class="pulse-eye"></span>
-      Oyentes en este momento: <span id="listenersCount">247</span>
+  <div class="hero-mini-grid">
+    <div class="mini-card">
+      <div class="mini-label">Oyentes en este momento</div>
+      <div class="mini-value"><span class="oyentes-num" id="oyentesCount">248</span> oyentes</div>
     </div>
-    <div class="listeners-sub" id="listenersTrend">Actualizando en tiempo real...</div>
+    <div class="mini-card">
+      <div class="mini-label">Ahora suena</div>
+      <div class="mini-value" id="nowPlayingTitle">Cargando...</div>
+      <div class="mini-label" id="nowPlayingMeta" style="margin-top:4px">Radio Cannafest</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">WhatsApp de la radio</div>
+      <div class="mini-value" style="font-size:.9rem">Pedidos, pauta y difusión</div>
+    </div>
   </div>
 
   <audio id="radioPlayer" preload="none" src="https://usa15.fastcast4u.com/proxy/ciborg347?mp=/1"></audio>
 
-  <button class="play-btn" id="playBtn" onclick="toggleRadio()">▶ Escuchar radio</button>
-
-  <button class="share-btn" onclick="shareRadio()">📲 Compartir Radio Cannafest</button>
-
-  <div id="playerStatus" style="color:#fff;margin-top:10px;opacity:.9;">
-    ⏸ La radio está detenida👮🏻‍♂️😖.
+  <div class="btn-row">
+    <button class="btn play-btn" id="playBtn" onclick="toggleRadio()">▶ Escuchar radio</button>
+    <button class="btn share-btn" onclick="shareRadio()">📲 Compartir radio</button>
+    <a class="btn btn-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer">💬 Pedí tu tema</a>
+    <a class="btn btn-outline" href="#pauta">📣 Pautá en la radio</a>
   </div>
 
-  <!-- BOTÓN PARA INSTALAR LA APP -->
-  <button id="installBtn" style="
-    background:#00ff88;
-    color:#000;
-    padding:12px 25px;
-    border-radius:30px;
-    font-size:1.1em;
-    border:none;
-    margin-top:25px;
-    cursor:pointer;
-    display:none;
-    box-shadow:0 0 12px #00ff88;
-  ">
-  📲 Instalar Radio Cannafest🙌🏻
-  </button>
+  <div id="playerStatus">⏸ La radio está detenida.</div>
+
+  <button id="installBtn">📲 Instalar Radio Cannafest</button>
+</div>
+
+<div class="container">
+
+  <!-- PEDI TU TEMA -->
+  <section class="section glass" id="pedi-tu-tema">
+    <h2>Pedí tu tema por WhatsApp</h2>
+    <p class="section-sub">
+      Dejanos tu nombre y tu número para que te quede guardado en tu navegador y puedas pedir temas más rápido la próxima vez.
+    </p>
+
+    <form id="temaForm" class="request-grid" novalidate>
+      <div class="field">
+        <label for="nombreOyente">Nombre</label>
+        <input id="nombreOyente" type="text" placeholder="Ej: Martín" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="numeroOyente">Número (opcional)</label>
+        <input id="numeroOyente" type="tel" placeholder="Ej: 11 1234 5678" autocomplete="tel">
+      </div>
+      <div class="field full">
+        <label for="pedidoTema">Pedido musical</label>
+        <textarea id="pedidoTema" placeholder="Ej: Quiero pedir Los Cafres - Tus Ojos / saludo para..."></textarea>
+      </div>
+      <div class="field full">
+        <button type="submit" class="btn btn-wa" style="width:100%;">Enviar pedido por WhatsApp</button>
+        <div class="helper">
+          Solo pedido musical por ahora (sin mensajes en vivo). Si recargás la web, tus datos quedan guardados en este dispositivo.
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- ULTIMOS PEDIDOS (ROTATIVOS) -->
+  <section class="section glass" id="ultimos-pedidos">
+    <h2>Últimos pedidos musicales</h2>
+    <p class="section-sub">Pedidos dinámicos de la comunidad que van cambiando automáticamente para darle vida a la radio.</p>
+    <div class="pedidos-list" id="pedidosList"></div>
+  </section>
+
+  <!-- COMO PARTICIPAR -->
+  <section class="section glass" id="participar">
+    <h2>Cómo participar</h2>
+    <p class="section-sub">Simple, rápido y pensado para oyentes, feriantes y emprendimientos.</p>
+    <div class="cards-3">
+      <article class="info-card">
+        <h3>1) Escuchá la radio</h3>
+        <p>Entrás, tocás “Escuchar radio” y te quedás en vivo mientras navegás la web.</p>
+      </article>
+      <article class="info-card">
+        <h3>2) Pedí tu tema</h3>
+        <p>Mandás tu pedido por WhatsApp con un texto prearmado. Fácil desde celu o PC.</p>
+      </article>
+      <article class="info-card">
+        <h3>3) Difundí / pautá</h3>
+        <p>Si tenés marca, feria o evento, podés sumar visibilidad con spot grabado y banner web.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROGRAMACION -->
+  <section class="section glass" id="programacion">
+    <h2>Programación / Franjas musicales</h2>
+    <p class="section-sub">Bloques de referencia para ordenar la experiencia de la radio y darle formato profesional.</p>
+    <div class="cards-4">
+      <article class="info-card">
+        <h3>Mañana</h3>
+        <p>Vibra positiva, reggae roots, clásicos y arranque tranqui para acompañar el día.</p>
+      </article>
+      <article class="info-card">
+        <h3>Tarde</h3>
+        <p>Selección dinámica, novedades, mezcla de estilos y difusión de emprendimientos.</p>
+      </article>
+      <article class="info-card">
+        <h3>Noche</h3>
+        <p>Sets más intensos, sesiones, especiales y clima ideal para quedarse conectado.</p>
+      </article>
+      <article class="info-card">
+        <h3>Madrugada</h3>
+        <p>Flujo continuo, selección atmosférica y música para acompañar hasta la mañana.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- EVENTO DESTACADO -->
+  <section class="section glass" id="evento-destacado">
+    <h2>Evento destacado</h2>
+    <p class="section-sub">Espacio principal para difusión de ferias, fechas y convocatorias de la comunidad.</p>
+
+    <div class="feature-event">
+      <div class="feature-image">
+        <img src="https://iili.io/qKLuPVa.jpg" alt="Jah Roots Sur Feria en Wilde">
+      </div>
+
+      <div class="feature-body">
+        <span class="feature-tag">Destacado de la semana</span>
+        <h3>JAH ROOTS SUR FERIA - Convocatoria a feriantes (Wilde)</h3>
+        <p>
+          Una fecha ideal para compartir, vender y conectar con la comunidad en Bar Mandrágora.
+          Feria + artistas invitados + DJ en formato Sound System.
+        </p>
+        <div class="event-meta">
+          <div>📍 Lugar: Bar Mandrágora - Wilde</div>
+          <div>📅 Fecha: Sábado 28 de febrero</div>
+          <div>🛠 Armado: desde las 14 hs</div>
+          <div>🛍 Feria: de 15 a 21 hs</div>
+          <div>💰 Stand: $15.000 (se puede compartir mesa)</div>
+        </div>
+
+        <div class="btn-row" style="justify-content:flex-start; margin-top:12px;">
+          <a class="btn btn-outline" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">📷 Ver Instagram de Jah Roots Sur</a>
+          <a class="btn btn-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer">📣 Quiero difundir un evento</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARCAS QUE ACOMPAÑAN -->
+  <section class="section glass" id="marcas">
+    <h2>Marcas que acompañan la radio</h2>
+    <p class="section-sub">Espacio publicitario / vidriera para emprendimientos. Banner + perfil + difusión.</p>
+
+    <div class="brands-track">
+
+      <!-- CIBORG -->
+      <article class="brand-card">
+        <div class="brand-img">
+          <img src="https://iili.io/qKLurDF.jpg" alt="CIBORG 347">
+        </div>
+        <div class="brand-body">
+          <h3>CIBORG 347 | Landing Pages & Designs</h3>
+          <p>
+            Diseño y desarrollo de sitios web simples y profesionales para emprendimientos, marcas, radios y negocios.
+          </p>
+          <div class="btn-row" style="justify-content:flex-start; margin-top:2px;">
+            <a class="btn btn-outline" href="https://www.instagram.com/ciborg347" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- MATU GRINDERS -->
+      <article class="brand-card">
+        <div class="brand-img">
+          <img src="https://iili.io/qKLu6og.jpg" alt="Matu Grinders">
+        </div>
+        <div class="brand-body">
+          <h3>Matu Grinders</h3>
+          <p>
+            Grinders y productos con impronta propia. Emprendimiento ideal para sumar visibilidad dentro de la comunidad.
+          </p>
+          <div class="btn-row" style="justify-content:flex-start; margin-top:2px;">
+            <a class="btn btn-outline" href="https://www.instagram.com/matu_grinders?igsh=MWJrNHo1eHBybGp3cg==" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- JAH ROOTS SUR (tambien como marca/comunidad) -->
+      <article class="brand-card">
+        <div class="brand-img">
+          <img src="https://iili.io/qKLuPVa.jpg" alt="Jah Roots Sur">
+        </div>
+        <div class="brand-body">
+          <h3>Jah Roots Sur</h3>
+          <p>
+            Comunidad, ferias y movidas culturales. Difusión de convocatorias y eventos con enfoque local y colaborativo.
+          </p>
+          <div class="btn-row" style="justify-content:flex-start; margin-top:2px;">
+            <a class="btn btn-outline" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PAUTA -->
+  <section class="section glass" id="pauta">
+    <h2>Pautá en Radio Cannafest</h2>
+    <p class="section-sub">
+      Sumá visibilidad para tu emprendimiento, feria, servicio o evento con difusión en la web y posibilidad de spot grabado.
+    </p>
+
+    <div class="pauta-grid">
+      <div class="info-card">
+        <h3>Opciones de difusión</h3>
+        <div class="list">
+          <div class="li">📌 Banner / card en la web (sección de marcas que acompañan)</div>
+          <div class="li">🎙 Spot grabado para pasar en la radio</div>
+          <div class="li">📣 Difusión de eventos / convocatorias</div>
+          <div class="li">🔗 Enlace directo a Instagram / contacto</div>
+          <div class="li">🤝 Combos con diseño web / landing (CIBORG 347)</div>
+        </div>
+
+        <div class="btn-row" style="justify-content:flex-start; margin-top:12px;">
+          <a class="btn btn-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer">Comunicación / pauta por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>Ideal para</h3>
+        <div class="list">
+          <div class="li">Ferias y convocatorias</div>
+          <div class="li">Emprendimientos locales</div>
+          <div class="li">Servicios y oficios</div>
+          <div class="li">Bandas / artistas / fechas</div>
+          <div class="li">Marcas que quieren comunidad + alcance</div>
+        </div>
+
+        <div class="price-box" style="margin-top:12px;">
+          <h4>¿Querés aparecer acá?</h4>
+          <p>
+            Escribinos y contanos qué querés promocionar. Te armamos una propuesta de difusión según tu objetivo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE LA RADIO -->
+  <section class="section glass" id="sobre-radio">
+    <h2>Sobre Radio Cannafest</h2>
+    <p class="section-sub">
+      Radio Cannafest es un espacio de música, cultura y comunidad. Además de la transmisión en vivo, funciona como vidriera para emprendimientos y difusión de eventos.
+    </p>
+    <div class="cards-3">
+      <div class="kpi">
+        <strong>Música + comunidad</strong>
+        <span>Una web pensada para escuchar, participar y conectar.</span>
+      </div>
+      <div class="kpi">
+        <strong>Difusión real</strong>
+        <span>Eventos, marcas y proyectos con presencia en web + radio.</span>
+      </div>
+      <div class="kpi">
+        <strong>Pedidos por WhatsApp</strong>
+        <span>Canal directo para oyentes y consultas comerciales.</span>
+      </div>
+    </div>
+  </section>
 
 </div>
 
@@ -516,97 +947,26 @@ body{
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="insta-logo" alt="Instagram">
     @cannafest2025
   </a>
-</div>
-
-<!-- NUEVO: EMPRENDIMIENTOS / SPOTS (carrusel horizontal) -->
-<div class="spots-wrap">
-  <section class="section-neon">
-    <h2 class="section-title">Emprendimientos y spots de la comunidad</h2>
-    <p class="section-sub">Espacio publicitario para marcas, ferias y proyectos que acompañan Radio Cannafest.</p>
-
-    <div class="spots-scroller" aria-label="Carrusel de emprendimientos y spots publicitarios">
-
-      <!-- MATU GRINDERS -->
-      <article class="spot-card">
-        <img class="spot-img" src="https://iili.io/qKLurDF.jpg" alt="Matu Grinders" loading="lazy">
-        <div class="spot-body">
-          <span class="spot-badge">Emprendimiento destacado</span>
-          <h3 class="spot-title">Matu Grinders</h3>
-          <p class="spot-text">Grinders y accesorios para la comunidad. Mirá modelos, novedades y consultas desde su Instagram.</p>
-          <div class="spot-meta">
-            <span>Accesorios</span>
-            <span>Comunidad</span>
-            <span>IG directo</span>
-          </div>
-          <div class="spot-actions">
-            <a class="spot-btn ig" href="https://www.instagram.com/matu_grinders?igsh=MWJrNHo1eHBybGp3cg==" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- JAH ROOTS SUR FERIA (segunda foto) -->
-      <article class="spot-card">
-        <img class="spot-img" src="https://iili.io/qKLuPVa.jpg" alt="JAH ROOTS SUR FERIA" loading="lazy">
-        <div class="spot-body">
-          <span class="spot-badge">Evento / Convocatoria</span>
-          <h3 class="spot-title">JAH ROOTS SUR FERIA | Convocatoria a feriantes</h3>
-          <p class="spot-text">Feria en Wilde con música, DJ y comunidad. Reserva tu lugar y participá con tu emprendimiento en Bar Mandrágora.</p>
-          <div class="spot-meta">
-            <span>Wilde</span>
-            <span>Stand desde $15.000</span>
-            <span>15 a 21 hs</span>
-          </div>
-          <div class="spot-actions">
-            <a class="spot-btn ig" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">Ver Instagram / Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CIBORG 347 -->
-      <article class="spot-card">
-        <img class="spot-img" src="https://iili.io/qKLu6og.jpg" alt="CIBORG 347" loading="lazy">
-        <div class="spot-body">
-          <span class="spot-badge">Servicios digitales</span>
-          <h3 class="spot-title">CIBORG 347 | Sitios web y diseño</h3>
-          <p class="spot-text">Trabajo creando y diseñando sitios web simples y profesionales para emprendimientos, marcas y proyectos.</p>
-          <div class="spot-meta">
-            <span>Webs</span>
-            <span>Diseño</span>
-            <span>Landing pages</span>
-          </div>
-          <div class="spot-actions">
-            <a class="spot-btn ig" href="https://www.instagram.com/ciborg347" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- NUEVO: BLOQUE PAUTA EN RADIO -->
-  <section class="section-neon ads-box">
-    <h3>Publicitá en Radio Cannafest</h3>
-    <p>
-      Spots grabados + banner en la web para emprendimientos y marcas. Si querés pautar en la radio, comunicate por WhatsApp y consultá disponibilidad.
-    </p>
-    <a class="ads-cta" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer">
-      💬 Consultar pauta por WhatsApp
-    </a>
-    <div class="ads-note">Radio Cannafest • Espacio para difusión de emprendimientos, eventos y marcas amigas.</div>
-  </section>
+  <div class="insta-sub">Seguinos para novedades, contenido, difusión y movimientos de la comunidad.</div>
 </div>
 
 <!-- FOOTER -->
 <a class="footer-ciborg" href="https://ciborg347.onrender.com" target="_blank" rel="noopener noreferrer">
-  Creado y diseñado por Ciborg347™
+  Creado y diseñado por Ciborg 347
 </a>
 
-<!-- SCRIPTS -->
+<!-- FLOATING WHATSAPP -->
+<a class="floating-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de la radio">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.47 0 .09 5.36.09 11.96c0 2.11.55 4.18 1.6 6.01L0 24l6.2-1.62a11.92 11.92 0 0 0 5.87 1.5h.01c6.59 0 11.97-5.36 11.97-11.96c0-3.2-1.25-6.2-3.53-8.44ZM12.08 21.86h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.68.96.98-3.59-.23-.37a9.9 9.9 0 0 1-1.53-5.31c0-5.48 4.46-9.94 9.95-9.94c2.66 0 5.15 1.03 7.03 2.9a9.85 9.85 0 0 1 2.92 7.03c0 5.48-4.47 9.94-9.95 9.94Zm5.45-7.42c-.3-.15-1.79-.88-2.07-.98c-.28-.1-.48-.15-.68.15c-.2.3-.78.98-.95 1.18c-.18.2-.35.23-.65.08c-.3-.15-1.25-.46-2.39-1.47c-.89-.79-1.49-1.76-1.66-2.06c-.18-.3-.02-.46.13-.61c.14-.14.3-.35.45-.53c.15-.18.2-.3.3-.5c.1-.2.05-.38-.03-.53c-.08-.15-.68-1.65-.93-2.25c-.25-.61-.5-.52-.68-.53h-.58c-.2 0-.53.08-.8.38c-.28.3-1.05 1.03-1.05 2.51s1.08 2.92 1.23 3.12c.15.2 2.12 3.24 5.13 4.54c.72.31 1.28.49 1.72.62c.72.23 1.38.2 1.9.12c.58-.09 1.79-.73 2.05-1.44c.25-.71.25-1.31.18-1.44c-.08-.13-.28-.2-.58-.35Z"/></svg>
+</a>
+
 <script>
+/* SERVICE WORKER / PWA */
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
+  navigator.serviceWorker.register("/service-worker.js").catch(() => {});
 }
 
+/* INSTALL PROMPT */
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
 
@@ -618,188 +978,316 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
 installBtn.addEventListener("click", async () => {
   if (!deferredPrompt) return;
-
   deferredPrompt.prompt();
-  const choice = await deferredPrompt.userChoice;
-
+  try { await deferredPrompt.userChoice; } catch(e){}
   deferredPrompt = null;
   installBtn.style.display = "none";
 });
 
-/* RADIO */
-const audio=document.getElementById("radioPlayer");
-const btn=document.getElementById("playBtn");
-const statusEl=document.getElementById("playerStatus");
-let playing=false;
+/* RADIO PLAYER */
+const audio = document.getElementById("radioPlayer");
+const btn = document.getElementById("playBtn");
+const statusEl = document.getElementById("playerStatus");
+let playing = false;
 
 function toggleRadio(){
   if(!playing){
     audio.load();
     audio.play().then(()=>{
-      playing=true;
-      btn.textContent="⏸ Detener radio";
-      statusEl.textContent="🎧 😎Reproduciendo🎶🤙🏻...";
+      playing = true;
+      btn.textContent = "⏸ Detener radio";
+      statusEl.textContent = "🎧 Reproduciendo en vivo...";
     }).catch(()=>{
-      statusEl.textContent="⚠ Tocá nuevamente para iniciar";
+      statusEl.textContent = "⚠ Tocá nuevamente para iniciar la radio";
     });
   } else {
     audio.pause();
-    playing=false;
-    btn.textContent="▶ Escuchar radio";
-    statusEl.textContent="⏸ La radio está detenida😳😵.";
+    playing = false;
+    btn.textContent = "▶ Escuchar radio";
+    statusEl.textContent = "⏸ La radio está detenida.";
   }
 }
 
 function shareRadio(){
-  const text="🎧 Escuchá Radio Cannafest: música, difusión y buena onda!";
-  const url="https://radio-cannafest.onrender.com";
-
+  const text = "🎧 Escuchá Radio Cannafest: música, difusión y buena onda!";
+  const url = "https://radio-cannafest.onrender.com";
   if(navigator.share){
-    navigator.share({title:"Radio Cannafest",text,url});
+    navigator.share({title:"Radio Cannafest", text, url}).catch(()=>{});
   } else {
-    alert("Copiá y compartí:\n"+text+"\n"+url);
+    alert("Copiá y compartí:\n" + text + "\n" + url);
   }
 }
 
+/* HORA / FECHA */
 function actHora(){
-  let n=new Date();
-  document.getElementById("hora").textContent=n.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
-  document.getElementById("fecha").textContent=n.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"});
+  const n = new Date();
+  document.getElementById("hora").textContent = n.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+  document.getElementById("fecha").textContent = n.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"});
 }
-setInterval(actHora,1000);actHora();
+setInterval(actHora,1000);
+actHora();
 
+/* CLIMA */
 async function cargarClima(){
   try{
-    let ip=await fetch("https://ipapi.co/json/").then(r=>r.json());
-    let r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ip.latitude}&longitude=${ip.longitude}&current_weather=true`).then(x=>x.json());
-    let t=r.current_weather.temperature;
-    let c=r.current_weather.weathercode;
+    const ip = await fetch("https://ipapi.co/json/").then(r=>r.json());
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ip.latitude}&longitude=${ip.longitude}&current_weather=true`).then(x=>x.json());
+    const t = r.current_weather.temperature;
+    const c = r.current_weather.weathercode;
 
-    let icon="☀️", est="Despejado";
-    if(c>=45&&c<=48){icon="🌫️";est="Niebla"}
-    if(c>=51&&c<=57){icon="🌦️";est="Llovizna"}
-    if(c>=61&&c<=67){icon="🌧️";est="Lluvia"}
-    if(c>=71&&c<=77){icon="❄️";est="Nieve"}
-    if(c>=80&&c<=82){icon="🌧️";est="Chaparrones"}
-    if(c>=95){icon="⛈️";est="Tormenta"}
+    let icon = "☀️", est = "Despejado";
+    if(c>=1 && c<=3){icon="⛅";est="Parcialmente nublado";}
+    if(c>=45&&c<=48){icon="🌫️";est="Niebla";}
+    if(c>=51&&c<=57){icon="🌦️";est="Llovizna";}
+    if(c>=61&&c<=67){icon="🌧️";est="Lluvia";}
+    if(c>=71&&c<=77){icon="❄️";est="Nieve";}
+    if(c>=80&&c<=82){icon="🌧️";est="Chaparrones";}
+    if(c>=95){icon="⛈️";est="Tormenta";}
 
-    document.getElementById("clima").textContent=`${icon} ${ip.city} – ${t}°C – ${est}`;
+    document.getElementById("clima").textContent = `${icon} ${ip.city} - ${t}°C - ${est}`;
   }catch{
-    document.getElementById("clima").textContent="Clima no disponible";
+    document.getElementById("clima").textContent = "Clima no disponible";
   }
 }
 cargarClima();
 
-/* ===== NUEVO: OYENTES DINÁMICOS CON PERSISTENCIA (suave) ===== */
-(function(){
-  const countEl = document.getElementById("listenersCount");
-  const trendEl = document.getElementById("listenersTrend");
-  if(!countEl) return;
+/* OYENTES DINAMICOS (SUAVE + PERSISTENTE) */
+const oyentesEl = document.getElementById("oyentesCount");
+const OYENTES_KEY = "radio_cannafest_oyentes_v2";
 
-  const STORAGE_KEY = "cannafest_listeners_state_v1";
+function getTargetRangeByHour(hour){
+  // sin saltos bruscos, de madrugada puede bajar
+  if(hour >= 0 && hour < 3) return {min:95, max:180};
+  if(hour >= 3 && hour < 6) return {min:50, max:130};
+  if(hour >= 6 && hour < 10) return {min:140, max:240};
+  if(hour >= 10 && hour < 14) return {min:180, max:290};
+  if(hour >= 14 && hour < 18) return {min:170, max:280};
+  if(hour >= 18 && hour < 22) return {min:220, max:373}; // noche sube un poco mas
+  return {min:190, max:340}; // 22 a 00
+}
 
-  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-  function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
 
-  function getHourProfile(hour){
-    // Rangos por horario (graduales). Noche algo más alta, madrugada puede bajar.
-    if(hour >= 0 && hour < 3)  return { min:120, max:240, idealMin:150, idealMax:220, changeEveryMs:9000, maxStep:2 };
-    if(hour >= 3 && hour < 6)  return { min:50,  max:180, idealMin:80,  idealMax:150, changeEveryMs:10000, maxStep:2 };
-    if(hour >= 6 && hour < 10) return { min:140, max:260, idealMin:180, idealMax:240, changeEveryMs:8000, maxStep:2 };
-    if(hour >= 10 && hour < 14)return { min:180, max:320, idealMin:220, idealMax:290, changeEveryMs:7000, maxStep:3 };
-    if(hour >= 14 && hour < 18)return { min:170, max:330, idealMin:210, idealMax:300, changeEveryMs:6500, maxStep:3 };
-    if(hour >= 18 && hour < 22)return { min:220, max:373, idealMin:255, idealMax:345, changeEveryMs:6000, maxStep:3 };
-    return { min:190, max:340, idealMin:230, idealMax:310, changeEveryMs:7000, maxStep:3 }; // 22 a 24
+function initOyentes(){
+  const now = Date.now();
+  const hour = new Date().getHours();
+  const range = getTargetRangeByHour(hour);
+
+  let state;
+  try { state = JSON.parse(localStorage.getItem(OYENTES_KEY) || "null"); } catch(e){ state = null; }
+
+  if(!state || typeof state.value !== "number"){
+    state = { value: Math.floor((range.min + range.max) / 2), ts: now };
+    localStorage.setItem(OYENTES_KEY, JSON.stringify(state));
   }
 
-  function loadState(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return null;
-      const data = JSON.parse(raw);
-      if(typeof data.count !== "number") return null;
-      return data;
-    }catch{
-      return null;
+  // Si paso mucho tiempo, ajusta de manera gradual (no reinicia brusco)
+  const elapsedMin = Math.floor((now - (state.ts || now)) / 60000);
+  let value = clamp(Math.round(state.value), 50, 373);
+
+  if(elapsedMin > 0){
+    for(let i=0; i<Math.min(elapsedMin, 240); i++){
+      value = nextOyentesValue(value, new Date((state.ts||now) + (i+1)*60000));
     }
+    state = { value, ts: now };
+    localStorage.setItem(OYENTES_KEY, JSON.stringify(state));
   }
 
-  function saveState(state){
-    try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }catch(e){}
+  oyentesEl.textContent = value;
+  return state;
+}
+
+function nextOyentesValue(current, dateObj){
+  const hour = dateObj.getHours();
+  const range = getTargetRangeByHour(hour);
+  const mid = (range.min + range.max) / 2;
+
+  // variacion suave escalonada
+  const stepMax = (hour >= 18 && hour < 22) ? 4 : 3;
+  let step = Math.floor(Math.random() * (stepMax * 2 + 1)) - stepMax; // -3..3 o -4..4
+
+  // sesgo para acercarse al rango/centro
+  if(current < range.min + 8) step = Math.max(step, 1);
+  if(current > range.max - 8) step = Math.min(step, -1);
+
+  // ligera tendencia al centro
+  if(current < mid - 25 && Math.random() < 0.55) step += 1;
+  if(current > mid + 25 && Math.random() < 0.55) step -= 1;
+
+  // evita estancamiento
+  if(step === 0 && Math.random() < 0.35) step = current < mid ? 1 : -1;
+
+  return clamp(current + step, 50, 373);
+}
+
+function tickOyentes(){
+  let state;
+  try { state = JSON.parse(localStorage.getItem(OYENTES_KEY) || "null"); } catch(e){ state = null; }
+  const now = Date.now();
+  let current = state && typeof state.value === "number" ? state.value : 220;
+  const next = nextOyentesValue(current, new Date(now));
+  const newState = { value: next, ts: now };
+  localStorage.setItem(OYENTES_KEY, JSON.stringify(newState));
+  oyentesEl.textContent = next;
+}
+initOyentes();
+setInterval(tickOyentes, 9000);
+
+/* AHORA SUENA (ROTATIVO VISUAL) */
+const nowPlayingTitle = document.getElementById("nowPlayingTitle");
+const nowPlayingMeta = document.getElementById("nowPlayingMeta");
+const nowTracks = [
+  {title:"Reggae Roots Selection", meta:"Bloque Manana"},
+  {title:"Dub & Bass Vibes", meta:"Sesion Cannafest"},
+  {title:"Clasicos del roots", meta:"Rotacion"},
+  {title:"Urban / fusion", meta:"Bloque Tarde"},
+  {title:"Set nocturno", meta:"Radio Cannafest"},
+  {title:"Mistica de madrugada", meta:"Flow continuo"},
+  {title:"Comunidad al aire", meta:"Pedidos musicales"}
+];
+function updateNowPlaying(){
+  const slot = Math.floor(Date.now() / (1000 * 60 * 7)); // cambia cada 7 min
+  const t = nowTracks[slot % nowTracks.length];
+  nowPlayingTitle.textContent = t.title;
+  nowPlayingMeta.textContent = t.meta;
+}
+updateNowPlaying();
+setInterval(updateNowPlaying, 30000);
+
+/* PEDIDOS MUSICALES ROTATIVOS */
+const pedidosData = [
+  {n:"Leo", z:"Wilde", t:"Los Cafres - Tus Ojos"},
+  {n:"Mica", z:"Quilmes", t:"Bob Marley - Is This Love"},
+  {n:"Nico", z:"San Miguel", t:"Dread Mar I - Tu Sin Mi"},
+  {n:"Cami", z:"Avellaneda", t:"Zona Ganjah - Quiero Volar"},
+  {n:"Tomi", z:"Pilar", t:"Nonpalidece - La Flor"},
+  {n:"Rocio", z:"Moron", t:"Alborosie - Kingston Town"},
+  {n:"Bruno", z:"Lomas", t:"Gondwana - Sentimiento Original"},
+  {n:"Sofi", z:"Lanus", t:"Los Pericos - Pupilas Lejanas"},
+  {n:"Axel", z:"Ituzaingo", t:"Kameleba - Todo Va A Estar Bien"},
+  {n:"Noe", z:"Wilde", t:"Fidel Nadal - International Love"},
+  {n:"Mati", z:"Haedo", t:"Damian Marley - Welcome To Jamrock"},
+  {n:"Luz", z:"Longchamps", t:"Cultura Profetica - Ilegal"},
+  {n:"Joa", z:"Jose C. Paz", t:"Morodo - La Yerba Del Rey"},
+  {n:"Mar", z:"Hurlingham", t:"Riddim - Hablame"},
+  {n:"Franco", z:"San Justo", t:"Resistencia Suburbana - Jah Guia"},
+  {n:"Ana", z:"Berazategui", t:"Protoje - Who Knows"},
+  {n:"Pablo", z:"Merlo", t:"Alika - No Dejes Que Te Paren"},
+  {n:"Delfi", z:"Tigre", t:"Los Cafres - Casi Q Te Envidio"},
+  {n:"Mauro", z:"Ramos Mejia", t:"Nonpalidece - Dame Luz"},
+  {n:"Vero", z:"Escobar", t:"Gondwana - Armonia De Amor"},
+  {n:"Gonza", z:"San Fernando", t:"Dread Mar I - Hoja En Blanco"},
+  {n:"Julieta", z:"Adrogue", t:"Kafu Banton - Caminando"},
+  {n:"Eze", z:"Bella Vista", t:"Los Pericos - Me Late"},
+  {n:"Yami", z:"Wilde", t:"Bob Marley - Could You Be Loved"},
+  {n:"Fede", z:"Banfield", t:"Zona Ganjah - Despertar"},
+  {n:"Ari", z:"Malvinas", t:"Kameleba - Pulso"},
+  {n:"Valen", z:"Vicente Lopez", t:"Cultura Profetica - Para Estar"},
+  {n:"Nacho", z:"Martinez", t:"Morodo - Divina Ciencia"},
+  {n:"Meli", z:"Ezeiza", t:"Dread Mar I - Asi Fue"},
+  {n:"Gabi", z:"Burzaco", t:"Resistencia Suburbana - Rastaman"},
+  {n:"Juan", z:"Moreno", t:"Nonpalidece - Mi Fortaleza"},
+  {n:"Ceci", z:"Florencio Varela", t:"Los Cafres - Bastara"},
+  {n:"Alan", z:"Wilde", t:"Gondwana - Verde Amarillo y Rojo"},
+  {n:"Karen", z:"Pacheco", t:"Alborosie - Herbalist"},
+  {n:"Santi", z:"San Martin", t:"Fidel Nadal - Te Robaste Mi Corazon"},
+  {n:"Nahir", z:"Don Torcuato", t:"Protoje - Kingston Be Wise"},
+  {n:"Lauti", z:"Paso del Rey", t:"Riddim - Aire"},
+  {n:"Agus", z:"Padua", t:"Damian Marley - Road To Zion"},
+  {n:"Flor", z:"Monte Grande", t:"Kafu Banton - Vamos Pa la Playa"},
+  {n:"Ivana", z:"Wilde", t:"Los Pericos - Waitin"},
+  {n:"Bauti", z:"Muñiz", t:"Kameleba - Irie"},
+  {n:"Carla", z:"Campana", t:"Zona Ganjah - Vibra Positiva"},
+  {n:"Dani", z:"Laferrere", t:"Dread Mar I - Nada"},
+  {n:"Micaela", z:"Temperley", t:"Gondwana - Felicidad"},
+  {n:"Hernan", z:"Caseros", t:"Nonpalidece - Reggae En El Universo"},
+  {n:"Bianca", z:"Merlo", t:"Los Cafres - Si El Amor Se Cae"},
+  {n:"Facu", z:"Quilmes", t:"Morodo - Burnin"},
+  {n:"Nati", z:"Pilar", t:"Cultura Profetica - Saca Prende y Sorprende"},
+  {n:"Thiago", z:"San Miguel", t:"Bob Marley - Three Little Birds"},
+  {n:"Paula", z:"Wilde", t:"Dread Mar I - No Corresponde"}
+];
+
+const pedidosList = document.getElementById("pedidosList");
+let pedidosPointer = 0;
+
+function renderPedidosBlock(){
+  if(!pedidosList) return;
+  pedidosList.innerHTML = "";
+  const itemsToShow = 6;
+  for(let i=0; i<itemsToShow; i++){
+    const item = pedidosData[(pedidosPointer + i) % pedidosData.length];
+    const row = document.createElement("div");
+    row.className = "pedido-item";
+    row.innerHTML = `
+      <div class="left">
+        <strong>${item.n} de ${item.z}</strong>
+        <span>Pidió: ${item.t}</span>
+      </div>
+      <div class="badge-live">Pedido musical</div>
+    `;
+    pedidosList.appendChild(row);
   }
+  pedidosPointer = (pedidosPointer + 2) % pedidosData.length;
+}
+renderPedidosBlock();
+setInterval(renderPedidosBlock, 9000);
 
-  const now = new Date();
-  const profile = getHourProfile(now.getHours());
-  const existing = loadState();
+/* FORM PEDI TU TEMA + LOCALSTORAGE */
+const temaForm = document.getElementById("temaForm");
+const nombreOyente = document.getElementById("nombreOyente");
+const numeroOyente = document.getElementById("numeroOyente");
+const pedidoTema = document.getElementById("pedidoTema");
 
-  let state = existing || {
-    count: randInt(profile.idealMin, profile.idealMax),
-    lastTs: Date.now(),
-    trend: "estable"
-  };
+const FORM_KEY = "radio_cannafest_pedido_form_v1";
 
-  // Si recargan y quedó fuera del rango actual, lo corregimos suave, no brusco.
-  state.count = clamp(Math.round(state.count), profile.min, profile.max);
-
-  function updateTrendLabel(delta){
-    if(delta > 0) return "Subiendo de a poco 📈";
-    if(delta < 0) return "Bajando suave 📉";
-    return "Estable ✨";
-  }
-
-  function tickListeners(){
-    const d = new Date();
-    const p = getHourProfile(d.getHours());
-
-    let delta = 0;
-    const center = Math.round((p.idealMin + p.idealMax) / 2);
-    const distanceToCenter = state.count - center;
-
-    // Tendencia según zona del rango ideal
-    if(state.count < p.idealMin){
-      delta = randInt(1, Math.min(p.maxStep, 2));
-    } else if(state.count > p.idealMax){
-      delta = -randInt(1, Math.min(p.maxStep, 2));
-    } else {
-      // Dentro del rango ideal: pequeñas fluctuaciones
-      const roll = Math.random();
-      if(roll < 0.34) delta = 0;
-      else if(roll < 0.67) delta = (Math.random() < 0.5 ? -1 : 1);
-      else delta = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.15 ? 2 : 1);
-    }
-
-    // Evitar saltos bruscos en extremos y ayudar a estabilizar
-    if(distanceToCenter > 40 && delta > 0) delta = 0;
-    if(distanceToCenter < -40 && delta < 0) delta = 0;
-
-    // Cambios un poco más suaves de madrugada
-    if(d.getHours() >= 3 && d.getHours() < 6 && Math.abs(delta) > 1){
-      delta = delta > 0 ? 1 : -1;
-    }
-
-    state.count = clamp(state.count + delta, p.min, p.max);
-    state.lastTs = Date.now();
-    state.trend = updateTrendLabel(delta);
-
-    countEl.textContent = state.count;
-    if(trendEl) trendEl.textContent = state.trend;
-    saveState(state);
-
-    // Reprogramar con cadencia según horario
-    clearTimeout(window.__listenersTimer);
-    window.__listenersTimer = setTimeout(tickListeners, p.changeEveryMs + randInt(-900, 1200));
-  }
-
-  // Pintado inicial
-  countEl.textContent = state.count;
-  if(trendEl) trendEl.textContent = "Actualizando en tiempo real...";
-  saveState(state);
-
-  // Arranque
-  setTimeout(tickListeners, 1800);
+(function loadSavedForm(){
+  try{
+    const data = JSON.parse(localStorage.getItem(FORM_KEY) || "{}");
+    if(data.nombre) nombreOyente.value = data.nombre;
+    if(data.numero) numeroOyente.value = data.numero;
+  }catch(e){}
 })();
+
+function saveFormLocal(){
+  const data = {
+    nombre: (nombreOyente.value || "").trim(),
+    numero: (numeroOyente.value || "").trim()
+  };
+  localStorage.setItem(FORM_KEY, JSON.stringify(data));
+}
+
+[nombreOyente, numeroOyente].forEach(el => {
+  el.addEventListener("input", saveFormLocal);
+  el.addEventListener("change", saveFormLocal);
+});
+
+temaForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  saveFormLocal();
+
+  const nombre = (nombreOyente.value || "").trim();
+  const numero = (numeroOyente.value || "").trim();
+  const pedido = (pedidoTema.value || "").trim();
+
+  if(!pedido){
+    pedidoTema.focus();
+    alert("Escribí el pedido musical antes de enviar.");
+    return;
+  }
+
+  const partes = [];
+  partes.push("Hola Radio Cannafest! Quiero pedir un tema.");
+  if(nombre) partes.push(`Nombre: ${nombre}`);
+  if(numero) partes.push(`Numero: ${numero}`);
+  partes.push(`Pedido: ${pedido}`);
+  partes.push("Gracias! (Pedido musical desde la web)");
+
+  const texto = encodeURIComponent(partes.join("\n"));
+  const waUrl = `https://wa.me/message/KPWJHN63WA3MA1?text=${texto}`;
+
+  window.open(waUrl, "_blank", "noopener,noreferrer");
+});
 </script>
 
 </body>
