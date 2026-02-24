@@ -91,11 +91,6 @@ img{max-width:100%;display:block}
   line-height:1.45;
 }
 
-.grid{
-  display:grid;
-  gap:12px;
-}
-
 /* TOP INFO */
 .top-info{
   max-width:680px;
@@ -214,32 +209,19 @@ img{max-width:100%;display:block}
   font-weight:700;
   font-size:1.1rem;
 }
-.now-song-wrap{
-  display:block;
+.now-song-box{
   min-width:0;
 }
-.now-song{
+.now-real,.now-fallback{
   display:block;
   min-width:0;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
-.now-song.marquee-track{
-  position:relative;
-  overflow:hidden;
-}
-.now-song.marquee-track span{
-  display:inline-block;
-  padding-right:24px;
-  white-space:nowrap;
-  animation:songTicker 10s linear infinite;
-}
-@keyframes songTicker{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-40%)}
-}
-
+.now-fallback{display:none}
+.now-real.hidden{display:none}
+.now-fallback.show{display:block}
 audio{width:100%;max-width:580px}
 
 /* BUTTONS */
@@ -684,9 +666,6 @@ audio{width:100%;max-width:580px}
   .title{font-size:2.25rem}
 }
 </style>
-
-<!-- Metadata real (Centova/FastCast4u) -->
-<script language="javascript" type="text/javascript" src="https://usa15.fastcast4u.com/system/streaminfo.js"></script>
 </head>
 
 <body>
@@ -718,12 +697,15 @@ audio{width:100%;max-width:580px}
 
     <div class="mini-card">
       <div class="mini-label">Ahora suena</div>
-      <div class="mini-value now-song-wrap">
-        <span class="now-song" id="nowPlayingTitleWrap">
-          <span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">Cargando tema...</span>
+      <div class="mini-value now-song-box">
+        <!-- Metadata real (NO tocar con JS) -->
+        <span class="now-real" id="nowRealWrap">
+          <span class="cc_streaminfo" data-type="song" data-username="ciborg347" id="centovaSong">Loading ...</span>
         </span>
+        <!-- Fallback fake separado -->
+        <span class="now-fallback" id="nowFallback">Cargando...</span>
       </div>
-      <div class="mini-label" id="nowPlayingMeta" style="margin-top:4px">Metadata en vivo (fallback automático)</div>
+      <div class="mini-label" id="nowPlayingMeta" style="margin-top:4px">Intentando metadata real...</div>
     </div>
 
     <div class="mini-card">
@@ -835,7 +817,7 @@ audio{width:100%;max-width:580px}
 
     <div class="feature-event">
       <div class="feature-image">
-        <!-- INVERTIDA: ahora Jah Roots usa la imagen correcta -->
+        <!-- JAH ROOTS (corregido) -->
         <img src="https://iili.io/qKLurDF.jpg" alt="Jah Roots Sur Feria en Wilde">
       </div>
 
@@ -875,7 +857,7 @@ audio{width:100%;max-width:580px}
       <!-- CIBORG -->
       <article class="brand-card">
         <div class="brand-img">
-          <!-- INVERTIDA: ahora CIBORG usa la imagen correcta -->
+          <!-- CIBORG (corregido) -->
           <img src="https://iili.io/qKLuPVa.jpg" alt="CIBORG 347">
         </div>
         <div class="brand-body">
@@ -911,7 +893,7 @@ audio{width:100%;max-width:580px}
         </div>
       </article>
 
-      <!-- JAH ROOTS SUR (tambien como marca/comunidad) -->
+      <!-- JAH ROOTS SUR -->
       <article class="brand-card">
         <div class="brand-img">
           <img src="https://iili.io/qKLurDF.jpg" alt="Jah Roots Sur">
@@ -1019,6 +1001,9 @@ audio{width:100%;max-width:580px}
 <a class="floating-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de la radio">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.47 0 .09 5.36.09 11.96c0 2.11.55 4.18 1.6 6.01L0 24l6.2-1.62a11.92 11.92 0 0 0 5.87 1.5h.01c6.59 0 11.97-5.36 11.97-11.96c0-3.2-1.25-6.2-3.53-8.44ZM12.08 21.86h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.68.96.98-3.59-.23-.37a9.9 9.9 0 0 1-1.53-5.31c0-5.48 4.46-9.94 9.95-9.94c2.66 0 5.15 1.03 7.03 2.9a9.85 9.85 0 0 1 2.92 7.03c0 5.48-4.47 9.94-9.95 9.94Zm5.45-7.42c-.3-.15-1.79-.88-2.07-.98c-.28-.1-.48-.15-.68.15c-.2.3-.78.98-.95 1.18c-.18.2-.35.23-.65.08c-.3-.15-1.25-.46-2.39-1.47c-.89-.79-1.49-1.76-1.66-2.06c-.18-.3-.02-.46.13-.61c.14-.14.3-.35.45-.53c.15-.18.2-.3.3-.5c.1-.2.05-.38-.03-.53c-.08-.15-.68-1.65-.93-2.25c-.25-.61-.5-.52-.68-.53h-.58c-.2 0-.53.08-.8.38c-.28.3-1.05 1.03-1.05 2.51s1.08 2.92 1.23 3.12c.15.2 2.12 3.24 5.13 4.54c.72.31 1.28.49 1.72.62c.72.23 1.38.2 1.9.12c.58-.09 1.79-.73 2.05-1.44c.25-.71.25-1.31.18-1.44c-.08-.13-.28-.2-.58-.35Z"/></svg>
 </a>
+
+<!-- Script de metadata real (Centova/FastCast4u) -->
+<script src="https://usa15.fastcast4u.com/system/streaminfo.js"></script>
 
 <script>
 /* SERVICE WORKER / PWA */
@@ -1187,60 +1172,13 @@ function tickOyentes(){
 initOyentes();
 setInterval(tickOyentes, 9000);
 
-/* AHORA SUENA REAL (Centova) + FALLBACK FAKE PRO */
-const nowPlayingTitleEl = document.getElementById("nowPlayingTitle");
-const nowPlayingTitleWrap = document.getElementById("nowPlayingTitleWrap");
+/* AHORA SUENA: metadata real (Centova) + fallback fake SEPARADO */
+const centovaSong = document.getElementById("centovaSong");
+const nowRealWrap = document.getElementById("nowRealWrap");
+const nowFallback = document.getElementById("nowFallback");
 const nowPlayingMeta = document.getElementById("nowPlayingMeta");
 
-let useFakeNowPlaying = true;
-
-function setNowPlayingText(text){
-  const clean = String(text || "").trim();
-  nowPlayingTitleEl.textContent = clean || "Radio Cannafest";
-  if(clean.length > 26){
-    nowPlayingTitleWrap.classList.add("marquee-track");
-    nowPlayingTitleWrap.innerHTML = `<span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">${clean}</span>`;
-  }else{
-    nowPlayingTitleWrap.classList.remove("marquee-track");
-    nowPlayingTitleWrap.innerHTML = `<span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">${clean}</span>`;
-  }
-}
-
-function refreshNowTitleHandle(){
-  return document.getElementById("nowPlayingTitle");
-}
-
-function isCentovaSongReady(){
-  const el = refreshNowTitleHandle();
-  if(!el) return false;
-  const t = (el.textContent || "").trim();
-  if(!t) return false;
-  if(/loading/i.test(t)) return false;
-  if(/cargando/i.test(t)) return false;
-  return true;
-}
-
-function checkCentovaMetadata(){
-  const el = refreshNowTitleHandle();
-  if(!el) return;
-  const t = (el.textContent || "").trim();
-
-  if(isCentovaSongReady()){
-    useFakeNowPlaying = false;
-    nowPlayingMeta.textContent = "Metadata real del stream";
-    if(t.length > 26){
-      nowPlayingTitleWrap.classList.add("marquee-track");
-      nowPlayingTitleWrap.innerHTML = `<span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">${t}</span>`;
-    }
-  }
-}
-
-// esperamos a que el widget de Centova complete el contenido
-setTimeout(checkCentovaMetadata, 1500);
-setTimeout(checkCentovaMetadata, 4000);
-setInterval(checkCentovaMetadata, 7000);
-
-// fallback fake (solo si metadata real no llega)
+let usingFallback = false;
 const nowTracks = [
   {title:"Reggae Roots Selection", meta:"Bloque Mañana"},
   {title:"Dub & Bass Vibes", meta:"Sesión Cannafest"},
@@ -1251,21 +1189,51 @@ const nowTracks = [
   {title:"Comunidad al aire", meta:"Pedidos musicales"}
 ];
 
+function isValidCentovaText(txt){
+  const t = (txt || "").trim();
+  if(!t) return false;
+  if(/loading/i.test(t)) return false;
+  if(/cargando/i.test(t)) return false;
+  if(t === "..." || t.length < 2) return false;
+  return true;
+}
+
+function activateFallback(){
+  usingFallback = true;
+  nowRealWrap.classList.add("hidden");
+  nowFallback.classList.add("show");
+  nowPlayingMeta.textContent = "Metadata real no disponible (fallback visual)";
+  updateNowPlayingFallback();
+}
+
+function restoreRealMetadata(){
+  usingFallback = false;
+  nowRealWrap.classList.remove("hidden");
+  nowFallback.classList.remove("show");
+  nowPlayingMeta.textContent = "Metadata real del stream";
+}
+
 function updateNowPlayingFallback(){
-  if(!useFakeNowPlaying) return;
+  if(!usingFallback) return;
   const slot = Math.floor(Date.now() / (1000 * 60 * 7));
   const t = nowTracks[slot % nowTracks.length];
-  nowPlayingMeta.textContent = `${t.meta} (fallback visual)`;
-  if(t.title.length > 26){
-    nowPlayingTitleWrap.classList.add("marquee-track");
-    nowPlayingTitleWrap.innerHTML = `<span id="nowPlayingTitle">${t.title}</span>`;
-  }else{
-    nowPlayingTitleWrap.classList.remove("marquee-track");
-    nowPlayingTitleWrap.innerHTML = `<span id="nowPlayingTitle">${t.title}</span>`;
-  }
+  nowFallback.textContent = t.title;
 }
-updateNowPlayingFallback();
-setInterval(updateNowPlayingFallback, 30000);
+
+function checkCentovaSong(){
+  const t = centovaSong ? centovaSong.textContent : "";
+  if(isValidCentovaText(t)){
+    restoreRealMetadata();
+    return true;
+  }
+  return false;
+}
+
+/* Espera breve a que streaminfo.js rellene el span */
+setTimeout(() => { if(!checkCentovaSong()) activateFallback(); }, 2500);
+setTimeout(() => { checkCentovaSong(); }, 5000);
+/* Si en algún momento empieza a responder, vuelve a metadata real */
+setInterval(() => { if(!checkCentovaSong()) updateNowPlayingFallback(); }, 8000);
 
 /* PEDIDOS MUSICALES ROTATIVOS (SOLO 3 Y MEZCLADOS) */
 const pedidosData = [
@@ -1334,17 +1302,25 @@ function shuffleArray(arr){
 }
 
 function pick3Mixed(){
-  const shuffled = shuffleArray(pedidosData);
-  let candidatos = shuffled.slice(0, 8);
+  let pool = shuffleArray(pedidosData);
+  let selected = [];
 
-  if(pedidosActuales.length){
-    candidatos = candidatos.filter(item => !pedidosActuales.some(p => p.n === item.n && p.t === item.t));
-    if(candidatos.length < 3){
-      candidatos = shuffleArray(pedidosData).filter(item => !candidatos.some(c => c.n === item.n && c.t === item.t));
+  for(let i=0; i<pool.length && selected.length<3; i++){
+    const item = pool[i];
+    const repeated = pedidosActuales.some(p => p.n === item.n && p.t === item.t);
+    if(!repeated) selected.push(item);
+  }
+
+  if(selected.length < 3){
+    pool = shuffleArray(pedidosData);
+    for(let i=0; i<pool.length && selected.length<3; i++){
+      const item = pool[i];
+      const exists = selected.some(s => s.n === item.n && s.t === item.t);
+      if(!exists) selected.push(item);
     }
   }
 
-  return shuffleArray(candidatos).slice(0, 3);
+  return selected;
 }
 
 function renderPedidosBlock(){
