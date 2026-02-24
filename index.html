@@ -214,6 +214,31 @@ img{max-width:100%;display:block}
   font-weight:700;
   font-size:1.1rem;
 }
+.now-song-wrap{
+  display:block;
+  min-width:0;
+}
+.now-song{
+  display:block;
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.now-song.marquee-track{
+  position:relative;
+  overflow:hidden;
+}
+.now-song.marquee-track span{
+  display:inline-block;
+  padding-right:24px;
+  white-space:nowrap;
+  animation:songTicker 10s linear infinite;
+}
+@keyframes songTicker{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-40%)}
+}
 
 audio{width:100%;max-width:580px}
 
@@ -256,6 +281,12 @@ audio{width:100%;max-width:580px}
   background:rgba(255,255,255,.03);
   color:#fff;
   border:1px solid rgba(255,255,255,.14);
+}
+.btn-ig-icon{
+  width:16px;
+  height:16px;
+  display:block;
+  border-radius:4px;
 }
 
 #playerStatus{
@@ -332,6 +363,12 @@ audio{width:100%;max-width:580px}
   background:rgba(255,255,255,.03);
   border-radius:12px;
   padding:10px 12px;
+  opacity:0;
+  transform:translateY(8px);
+  animation:pedidoIn .35s ease forwards;
+}
+@keyframes pedidoIn{
+  to{opacity:1;transform:translateY(0)}
 }
 .pedido-item .left{
   min-width:0;
@@ -647,6 +684,9 @@ audio{width:100%;max-width:580px}
   .title{font-size:2.25rem}
 }
 </style>
+
+<!-- Metadata real (Centova/FastCast4u) -->
+<script language="javascript" type="text/javascript" src="https://usa15.fastcast4u.com/system/streaminfo.js"></script>
 </head>
 
 <body>
@@ -675,11 +715,17 @@ audio{width:100%;max-width:580px}
       <div class="mini-label">Oyentes en este momento</div>
       <div class="mini-value"><span class="oyentes-num" id="oyentesCount">248</span> oyentes</div>
     </div>
+
     <div class="mini-card">
       <div class="mini-label">Ahora suena</div>
-      <div class="mini-value" id="nowPlayingTitle">Cargando...</div>
-      <div class="mini-label" id="nowPlayingMeta" style="margin-top:4px">Radio Cannafest</div>
+      <div class="mini-value now-song-wrap">
+        <span class="now-song" id="nowPlayingTitleWrap">
+          <span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">Cargando tema...</span>
+        </span>
+      </div>
+      <div class="mini-label" id="nowPlayingMeta" style="margin-top:4px">Metadata en vivo (fallback automático)</div>
     </div>
+
     <div class="mini-card">
       <div class="mini-label">WhatsApp de la radio</div>
       <div class="mini-value" style="font-size:.9rem">Pedidos, pauta y difusión</div>
@@ -789,7 +835,8 @@ audio{width:100%;max-width:580px}
 
     <div class="feature-event">
       <div class="feature-image">
-        <img src="https://iili.io/qKLuPVa.jpg" alt="Jah Roots Sur Feria en Wilde">
+        <!-- INVERTIDA: ahora Jah Roots usa la imagen correcta -->
+        <img src="https://iili.io/qKLurDF.jpg" alt="Jah Roots Sur Feria en Wilde">
       </div>
 
       <div class="feature-body">
@@ -808,7 +855,10 @@ audio{width:100%;max-width:580px}
         </div>
 
         <div class="btn-row" style="justify-content:flex-start; margin-top:12px;">
-          <a class="btn btn-outline" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">📷 Ver Instagram de Jah Roots Sur</a>
+          <a class="btn btn-outline" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="btn-ig-icon" alt="">
+            Ver Instagram de Jah Roots Sur
+          </a>
           <a class="btn btn-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer">📣 Quiero difundir un evento</a>
         </div>
       </div>
@@ -825,7 +875,8 @@ audio{width:100%;max-width:580px}
       <!-- CIBORG -->
       <article class="brand-card">
         <div class="brand-img">
-          <img src="https://iili.io/qKLurDF.jpg" alt="CIBORG 347">
+          <!-- INVERTIDA: ahora CIBORG usa la imagen correcta -->
+          <img src="https://iili.io/qKLuPVa.jpg" alt="CIBORG 347">
         </div>
         <div class="brand-body">
           <h3>CIBORG 347 | Landing Pages & Designs</h3>
@@ -833,7 +884,10 @@ audio{width:100%;max-width:580px}
             Diseño y desarrollo de sitios web simples y profesionales para emprendimientos, marcas, radios y negocios.
           </p>
           <div class="btn-row" style="justify-content:flex-start; margin-top:2px;">
-            <a class="btn btn-outline" href="https://www.instagram.com/ciborg347" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/ciborg347" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="btn-ig-icon" alt="">
+              Ver Instagram
+            </a>
           </div>
         </div>
       </article>
@@ -849,7 +903,10 @@ audio{width:100%;max-width:580px}
             Grinders y productos con impronta propia. Emprendimiento ideal para sumar visibilidad dentro de la comunidad.
           </p>
           <div class="btn-row" style="justify-content:flex-start; margin-top:2px;">
-            <a class="btn btn-outline" href="https://www.instagram.com/matu_grinders?igsh=MWJrNHo1eHBybGp3cg==" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/matu_grinders?igsh=MWJrNHo1eHBybGp3cg==" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="btn-ig-icon" alt="">
+              Ver Instagram
+            </a>
           </div>
         </div>
       </article>
@@ -857,7 +914,7 @@ audio{width:100%;max-width:580px}
       <!-- JAH ROOTS SUR (tambien como marca/comunidad) -->
       <article class="brand-card">
         <div class="brand-img">
-          <img src="https://iili.io/qKLuPVa.jpg" alt="Jah Roots Sur">
+          <img src="https://iili.io/qKLurDF.jpg" alt="Jah Roots Sur">
         </div>
         <div class="brand-body">
           <h3>Jah Roots Sur</h3>
@@ -865,7 +922,10 @@ audio{width:100%;max-width:580px}
             Comunidad, ferias y movidas culturales. Difusión de convocatorias y eventos con enfoque local y colaborativo.
           </p>
           <div class="btn-row" style="justify-content:flex-start; margin-top:2px;">
-            <a class="btn btn-outline" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="btn-ig-icon" alt="">
+              Ver Instagram
+            </a>
           </div>
         </div>
       </article>
@@ -1056,14 +1116,13 @@ const oyentesEl = document.getElementById("oyentesCount");
 const OYENTES_KEY = "radio_cannafest_oyentes_v2";
 
 function getTargetRangeByHour(hour){
-  // sin saltos bruscos, de madrugada puede bajar
   if(hour >= 0 && hour < 3) return {min:95, max:180};
   if(hour >= 3 && hour < 6) return {min:50, max:130};
   if(hour >= 6 && hour < 10) return {min:140, max:240};
   if(hour >= 10 && hour < 14) return {min:180, max:290};
   if(hour >= 14 && hour < 18) return {min:170, max:280};
-  if(hour >= 18 && hour < 22) return {min:220, max:373}; // noche sube un poco mas
-  return {min:190, max:340}; // 22 a 00
+  if(hour >= 18 && hour < 22) return {min:220, max:373};
+  return {min:190, max:340};
 }
 
 function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
@@ -1081,7 +1140,6 @@ function initOyentes(){
     localStorage.setItem(OYENTES_KEY, JSON.stringify(state));
   }
 
-  // Si paso mucho tiempo, ajusta de manera gradual (no reinicia brusco)
   const elapsedMin = Math.floor((now - (state.ts || now)) / 60000);
   let value = clamp(Math.round(state.value), 50, 373);
 
@@ -1102,19 +1160,15 @@ function nextOyentesValue(current, dateObj){
   const range = getTargetRangeByHour(hour);
   const mid = (range.min + range.max) / 2;
 
-  // variacion suave escalonada
   const stepMax = (hour >= 18 && hour < 22) ? 4 : 3;
-  let step = Math.floor(Math.random() * (stepMax * 2 + 1)) - stepMax; // -3..3 o -4..4
+  let step = Math.floor(Math.random() * (stepMax * 2 + 1)) - stepMax;
 
-  // sesgo para acercarse al rango/centro
   if(current < range.min + 8) step = Math.max(step, 1);
   if(current > range.max - 8) step = Math.min(step, -1);
 
-  // ligera tendencia al centro
   if(current < mid - 25 && Math.random() < 0.55) step += 1;
   if(current > mid + 25 && Math.random() < 0.55) step -= 1;
 
-  // evita estancamiento
   if(step === 0 && Math.random() < 0.35) step = current < mid ? 1 : -1;
 
   return clamp(current + step, 50, 373);
@@ -1133,64 +1187,123 @@ function tickOyentes(){
 initOyentes();
 setInterval(tickOyentes, 9000);
 
-/* AHORA SUENA (ROTATIVO VISUAL) */
-const nowPlayingTitle = document.getElementById("nowPlayingTitle");
+/* AHORA SUENA REAL (Centova) + FALLBACK FAKE PRO */
+const nowPlayingTitleEl = document.getElementById("nowPlayingTitle");
+const nowPlayingTitleWrap = document.getElementById("nowPlayingTitleWrap");
 const nowPlayingMeta = document.getElementById("nowPlayingMeta");
+
+let useFakeNowPlaying = true;
+
+function setNowPlayingText(text){
+  const clean = String(text || "").trim();
+  nowPlayingTitleEl.textContent = clean || "Radio Cannafest";
+  if(clean.length > 26){
+    nowPlayingTitleWrap.classList.add("marquee-track");
+    nowPlayingTitleWrap.innerHTML = `<span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">${clean}</span>`;
+  }else{
+    nowPlayingTitleWrap.classList.remove("marquee-track");
+    nowPlayingTitleWrap.innerHTML = `<span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">${clean}</span>`;
+  }
+}
+
+function refreshNowTitleHandle(){
+  return document.getElementById("nowPlayingTitle");
+}
+
+function isCentovaSongReady(){
+  const el = refreshNowTitleHandle();
+  if(!el) return false;
+  const t = (el.textContent || "").trim();
+  if(!t) return false;
+  if(/loading/i.test(t)) return false;
+  if(/cargando/i.test(t)) return false;
+  return true;
+}
+
+function checkCentovaMetadata(){
+  const el = refreshNowTitleHandle();
+  if(!el) return;
+  const t = (el.textContent || "").trim();
+
+  if(isCentovaSongReady()){
+    useFakeNowPlaying = false;
+    nowPlayingMeta.textContent = "Metadata real del stream";
+    if(t.length > 26){
+      nowPlayingTitleWrap.classList.add("marquee-track");
+      nowPlayingTitleWrap.innerHTML = `<span class="cc_streaminfo" id="nowPlayingTitle" data-type="song" data-username="ciborg347">${t}</span>`;
+    }
+  }
+}
+
+// esperamos a que el widget de Centova complete el contenido
+setTimeout(checkCentovaMetadata, 1500);
+setTimeout(checkCentovaMetadata, 4000);
+setInterval(checkCentovaMetadata, 7000);
+
+// fallback fake (solo si metadata real no llega)
 const nowTracks = [
-  {title:"Reggae Roots Selection", meta:"Bloque Manana"},
-  {title:"Dub & Bass Vibes", meta:"Sesion Cannafest"},
-  {title:"Clasicos del roots", meta:"Rotacion"},
-  {title:"Urban / fusion", meta:"Bloque Tarde"},
+  {title:"Reggae Roots Selection", meta:"Bloque Mañana"},
+  {title:"Dub & Bass Vibes", meta:"Sesión Cannafest"},
+  {title:"Clásicos del roots", meta:"Rotación"},
+  {title:"Urban / fusión", meta:"Bloque Tarde"},
   {title:"Set nocturno", meta:"Radio Cannafest"},
-  {title:"Mistica de madrugada", meta:"Flow continuo"},
+  {title:"Mística de madrugada", meta:"Flow continuo"},
   {title:"Comunidad al aire", meta:"Pedidos musicales"}
 ];
-function updateNowPlaying(){
-  const slot = Math.floor(Date.now() / (1000 * 60 * 7)); // cambia cada 7 min
-  const t = nowTracks[slot % nowTracks.length];
-  nowPlayingTitle.textContent = t.title;
-  nowPlayingMeta.textContent = t.meta;
-}
-updateNowPlaying();
-setInterval(updateNowPlaying, 30000);
 
-/* PEDIDOS MUSICALES ROTATIVOS */
+function updateNowPlayingFallback(){
+  if(!useFakeNowPlaying) return;
+  const slot = Math.floor(Date.now() / (1000 * 60 * 7));
+  const t = nowTracks[slot % nowTracks.length];
+  nowPlayingMeta.textContent = `${t.meta} (fallback visual)`;
+  if(t.title.length > 26){
+    nowPlayingTitleWrap.classList.add("marquee-track");
+    nowPlayingTitleWrap.innerHTML = `<span id="nowPlayingTitle">${t.title}</span>`;
+  }else{
+    nowPlayingTitleWrap.classList.remove("marquee-track");
+    nowPlayingTitleWrap.innerHTML = `<span id="nowPlayingTitle">${t.title}</span>`;
+  }
+}
+updateNowPlayingFallback();
+setInterval(updateNowPlayingFallback, 30000);
+
+/* PEDIDOS MUSICALES ROTATIVOS (SOLO 3 Y MEZCLADOS) */
 const pedidosData = [
   {n:"Leo", z:"Wilde", t:"Los Cafres - Tus Ojos"},
   {n:"Mica", z:"Quilmes", t:"Bob Marley - Is This Love"},
   {n:"Nico", z:"San Miguel", t:"Dread Mar I - Tu Sin Mi"},
   {n:"Cami", z:"Avellaneda", t:"Zona Ganjah - Quiero Volar"},
   {n:"Tomi", z:"Pilar", t:"Nonpalidece - La Flor"},
-  {n:"Rocio", z:"Moron", t:"Alborosie - Kingston Town"},
+  {n:"Rocio", z:"Morón", t:"Alborosie - Kingston Town"},
   {n:"Bruno", z:"Lomas", t:"Gondwana - Sentimiento Original"},
-  {n:"Sofi", z:"Lanus", t:"Los Pericos - Pupilas Lejanas"},
-  {n:"Axel", z:"Ituzaingo", t:"Kameleba - Todo Va A Estar Bien"},
+  {n:"Sofi", z:"Lanús", t:"Los Pericos - Pupilas Lejanas"},
+  {n:"Axel", z:"Ituzaingó", t:"Kameleba - Todo Va A Estar Bien"},
   {n:"Noe", z:"Wilde", t:"Fidel Nadal - International Love"},
   {n:"Mati", z:"Haedo", t:"Damian Marley - Welcome To Jamrock"},
-  {n:"Luz", z:"Longchamps", t:"Cultura Profetica - Ilegal"},
-  {n:"Joa", z:"Jose C. Paz", t:"Morodo - La Yerba Del Rey"},
+  {n:"Luz", z:"Longchamps", t:"Cultura Profética - Ilegal"},
+  {n:"Joa", z:"José C. Paz", t:"Morodo - La Yerba Del Rey"},
   {n:"Mar", z:"Hurlingham", t:"Riddim - Hablame"},
-  {n:"Franco", z:"San Justo", t:"Resistencia Suburbana - Jah Guia"},
+  {n:"Franco", z:"San Justo", t:"Resistencia Suburbana - Jah Guía"},
   {n:"Ana", z:"Berazategui", t:"Protoje - Who Knows"},
   {n:"Pablo", z:"Merlo", t:"Alika - No Dejes Que Te Paren"},
   {n:"Delfi", z:"Tigre", t:"Los Cafres - Casi Q Te Envidio"},
-  {n:"Mauro", z:"Ramos Mejia", t:"Nonpalidece - Dame Luz"},
-  {n:"Vero", z:"Escobar", t:"Gondwana - Armonia De Amor"},
+  {n:"Mauro", z:"Ramos Mejía", t:"Nonpalidece - Dame Luz"},
+  {n:"Vero", z:"Escobar", t:"Gondwana - Armonía De Amor"},
   {n:"Gonza", z:"San Fernando", t:"Dread Mar I - Hoja En Blanco"},
-  {n:"Julieta", z:"Adrogue", t:"Kafu Banton - Caminando"},
+  {n:"Julieta", z:"Adrogué", t:"Kafu Banton - Caminando"},
   {n:"Eze", z:"Bella Vista", t:"Los Pericos - Me Late"},
   {n:"Yami", z:"Wilde", t:"Bob Marley - Could You Be Loved"},
   {n:"Fede", z:"Banfield", t:"Zona Ganjah - Despertar"},
   {n:"Ari", z:"Malvinas", t:"Kameleba - Pulso"},
-  {n:"Valen", z:"Vicente Lopez", t:"Cultura Profetica - Para Estar"},
-  {n:"Nacho", z:"Martinez", t:"Morodo - Divina Ciencia"},
-  {n:"Meli", z:"Ezeiza", t:"Dread Mar I - Asi Fue"},
+  {n:"Valen", z:"Vicente López", t:"Cultura Profética - Para Estar"},
+  {n:"Nacho", z:"Martínez", t:"Morodo - Divina Ciencia"},
+  {n:"Meli", z:"Ezeiza", t:"Dread Mar I - Así Fue"},
   {n:"Gabi", z:"Burzaco", t:"Resistencia Suburbana - Rastaman"},
   {n:"Juan", z:"Moreno", t:"Nonpalidece - Mi Fortaleza"},
-  {n:"Ceci", z:"Florencio Varela", t:"Los Cafres - Bastara"},
+  {n:"Ceci", z:"Florencio Varela", t:"Los Cafres - Bastará"},
   {n:"Alan", z:"Wilde", t:"Gondwana - Verde Amarillo y Rojo"},
   {n:"Karen", z:"Pacheco", t:"Alborosie - Herbalist"},
-  {n:"Santi", z:"San Martin", t:"Fidel Nadal - Te Robaste Mi Corazon"},
+  {n:"Santi", z:"San Martín", t:"Fidel Nadal - Te Robaste Mi Corazón"},
   {n:"Nahir", z:"Don Torcuato", t:"Protoje - Kingston Be Wise"},
   {n:"Lauti", z:"Paso del Rey", t:"Riddim - Aire"},
   {n:"Agus", z:"Padua", t:"Damian Marley - Road To Zion"},
@@ -1200,25 +1313,50 @@ const pedidosData = [
   {n:"Carla", z:"Campana", t:"Zona Ganjah - Vibra Positiva"},
   {n:"Dani", z:"Laferrere", t:"Dread Mar I - Nada"},
   {n:"Micaela", z:"Temperley", t:"Gondwana - Felicidad"},
-  {n:"Hernan", z:"Caseros", t:"Nonpalidece - Reggae En El Universo"},
+  {n:"Hernán", z:"Caseros", t:"Nonpalidece - Reggae En El Universo"},
   {n:"Bianca", z:"Merlo", t:"Los Cafres - Si El Amor Se Cae"},
   {n:"Facu", z:"Quilmes", t:"Morodo - Burnin"},
-  {n:"Nati", z:"Pilar", t:"Cultura Profetica - Saca Prende y Sorprende"},
+  {n:"Nati", z:"Pilar", t:"Cultura Profética - Saca Prende y Sorprende"},
   {n:"Thiago", z:"San Miguel", t:"Bob Marley - Three Little Birds"},
   {n:"Paula", z:"Wilde", t:"Dread Mar I - No Corresponde"}
 ];
 
 const pedidosList = document.getElementById("pedidosList");
-let pedidosPointer = 0;
+let pedidosActuales = [];
+
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pick3Mixed(){
+  const shuffled = shuffleArray(pedidosData);
+  let candidatos = shuffled.slice(0, 8);
+
+  if(pedidosActuales.length){
+    candidatos = candidatos.filter(item => !pedidosActuales.some(p => p.n === item.n && p.t === item.t));
+    if(candidatos.length < 3){
+      candidatos = shuffleArray(pedidosData).filter(item => !candidatos.some(c => c.n === item.n && c.t === item.t));
+    }
+  }
+
+  return shuffleArray(candidatos).slice(0, 3);
+}
 
 function renderPedidosBlock(){
   if(!pedidosList) return;
+
+  pedidosActuales = pick3Mixed();
   pedidosList.innerHTML = "";
-  const itemsToShow = 6;
-  for(let i=0; i<itemsToShow; i++){
-    const item = pedidosData[(pedidosPointer + i) % pedidosData.length];
+
+  pedidosActuales.forEach((item, idx) => {
     const row = document.createElement("div");
     row.className = "pedido-item";
+    row.style.animationDelay = `${idx * 0.06}s`;
     row.innerHTML = `
       <div class="left">
         <strong>${item.n} de ${item.z}</strong>
@@ -1227,8 +1365,7 @@ function renderPedidosBlock(){
       <div class="badge-live">Pedido musical</div>
     `;
     pedidosList.appendChild(row);
-  }
-  pedidosPointer = (pedidosPointer + 2) % pedidosData.length;
+  });
 }
 renderPedidosBlock();
 setInterval(renderPedidosBlock, 9000);
