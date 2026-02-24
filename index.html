@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎧 RADIO CANNAFEST | En Vivo 24hs</title>
+
+<!-- ÍCONO Y MANIFEST PARA PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="https://iili.io/fIqhMwQ.webp">
+<link rel="apple-touch-icon" href="https://iili.io/fIqhMwQ.webp">
+<meta name="theme-color" content="#00ff88">
+
+<meta property="og:title" content="RADIO CANNAFEST | En Vivo 24hs">
+<meta property="og:description" content="Música, cultura y vibra 420 en vivo.">
+<meta property="og:image" content="https://iili.io/fI0exVa.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght:300;400;600&family=Montserrat:wght:600;700&display=swap" rel="stylesheet">
+
+<style>
+/* FONT FACE para el título — usa Cannabis.ttf */
+@font-face {
+  font-family: 'Cannabis';
+  src: url('Cannabis.ttf') format('truetype');
+  font-display: swap;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:url('https://iili.io/fzGgVlp.jpg') center/cover fixed no-repeat;
+  color:#00ff99;
+  text-align:center;
+  padding:20px;
+  overflow-x:hidden;
+}
+
+/* TOP INFO */
+.top-info{
+  max-width:500px;
+  margin:5px auto 15px;
+  padding:8px 15px;
+  background:rgba(0,0,0,.55);
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(0,255,150,0.40);
+}
+.clima-line{font-size:0.95em;color:#00ff99;text-shadow:0 0 6px #00ff99;}
+.hora-line{font-size:0.9em;color:#fff;opacity:.85}
+
+/* LOGO */
+.logo{
+  width:260px;
+  margin:10px auto 0;
+  display:block;
+  animation:logoNeon 3s infinite ease-in-out;
+}
+@keyframes logoNeon{
+  0%{filter:drop-shadow(0 0 10px #ffff33)}
+  33%{filter:drop-shadow(0 0 12px #ff3333)}
+  66%{filter:drop-shadow(0 0 12px #22ff22)}
+  100%{filter:drop-shadow(0 0 10px #ffff33)}
+}
+
+/* TÍTULO con fuente Cannabis */
+.title{
+  font-family: 'Cannabis', sans-serif;
+  font-size:2.2em;
+  font-weight:600;
+  margin-top:3px;
+  color:#00ffcc;
+  text-shadow:0 0 12px #00ff88,0 0 22px #00ffaa;
+}
+
+/* MARQUEE (texto deslizable) */
+.marquee{
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  box-sizing:border-box;
+  margin-top:15px;
+  font-size:1.15em;
+  font-weight:600;
+  color:#00ff88;
+  text-shadow:0 0 10px #00ff88;
+}
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll-left 10s linear infinite;
+}
+@keyframes scroll-left{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
+
+/* EN VIVO */
+.en-vivo{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,0,0,.25);border:1px solid #ff0033;
+  padding:6px 18px;border-radius:25px;
+  color:#ff3355;font-weight:700;margin:10px auto 8px;
+  box-shadow:0 0 10px #ff0033;
+}
+.en-vivo .dot{
+  width:10px;height:10px;border-radius:50%;background:#ff0033;
+  animation:pulse 1s infinite;
+}
+@keyframes pulse{
+ 0%{transform:scale(.9);opacity:.6}
+ 50%{transform:scale(1.4);opacity:1}
+ 100%{transform:scale(.9);opacity:.6}
+}
+
+/* OYENTES DINÁMICOS */
+.listeners-box{
+  margin:6px auto 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.listeners-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(0,255,136,.10);
+  border:1px solid rgba(0,255,136,.35);
+  box-shadow:0 0 10px rgba(0,255,136,.15);
+  color:#d7ffef;
+  font-weight:600;
+}
+.listeners-chip .pulse-eye{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#00ff88;
+  box-shadow:0 0 10px #00ff88;
+  animation:listenerPulse 1.8s infinite ease-in-out;
+}
+@keyframes listenerPulse{
+  0%,100%{transform:scale(.9);opacity:.7}
+  50%{transform:scale(1.25);opacity:1}
+}
+#listenersCount{
+  color:#00ff88;
+  font-weight:700;
+  min-width:38px;
+  display:inline-block;
+  text-align:right;
+}
+.listeners-sub{
+  color:#fff;
+  opacity:.78;
+  font-size:.9em;
+}
+
+/* CAJA RADIO */
+.radio-box{
+  background:rgba(0,0,0,.70);
+  padding:35px 28px;
+  border-radius:22px;
+  max-width:650px;
+  margin:25px auto;
+  box-shadow:0 0 18px rgba(0,255,150,0.30);
+  border:2px solid rgba(0,255,150,0.25);
+}
+
+/* BOTONES */
+.play-btn{
+  margin-top:20px;
+  background:linear-gradient(135deg,#00ff88,#00cc66);
+  padding:15px 50px;
+  border:none;border-radius:50px;
+  font-size:1.3em;
+  color:#000;font-weight:600;
+  box-shadow:0 0 12px #00ff88;
+  cursor:pointer;
+  transition:transform .2s ease;
+}
+.play-btn:hover{transform:scale(1.08)}
+
+.share-btn{
+  margin-top:15px;
+  background:linear-gradient(135deg,#00ccff,#0088ff);
+  padding:12px 40px;
+  border:none;border-radius:50px;
+  font-size:1.1em;
+  color:#fff;font-weight:600;
+  box-shadow:0 0 12px #00aaff;
+  cursor:pointer;
+  transition:transform .2s ease;
+}
+.share-btn:hover{transform:scale(1.08)}
+
+/* INSTAGRAM */
+.insta-box{
+  margin-top:45px;
+  padding:25px 20px;
+  border-radius:20px;
+  max-width:600px;
+  background:rgba(0,0,0,.8);
+  box-shadow:0 0 18px #ff00aa;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.insta-title{
+  font-size:1.8em;
+  color:#ff00aa;
+  margin-bottom:10px;
+}
+.insta-link{
+  color:#fff;
+  text-decoration:none;
+  font-size:1.2em;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  justify-content:center;
+}
+.insta-logo{
+  width:30px;
+  filter:drop-shadow(0 0 8px #ff00aa);
+}
+
+/* ===== NUEVO: SECCIÓN EMPRENDIMIENTOS / SPOTS ===== */
+.spots-wrap{
+  margin-top:28px;
+  max-width:950px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+}
+.section-neon{
+  background:rgba(0,0,0,.78);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 0 18px rgba(0,255,150,.18);
+  border:1px solid rgba(0,255,150,.18);
+}
+.section-neon + .section-neon{
+  margin-top:18px;
+}
+.section-title{
+  text-align:center;
+  font-family:'Montserrat', sans-serif;
+  font-size:1.35em;
+  color:#00ffcc;
+  text-shadow:0 0 8px rgba(0,255,170,.6);
+  margin-bottom:8px;
+}
+.section-sub{
+  text-align:center;
+  color:#fff;
+  opacity:.9;
+  margin-bottom:14px;
+  font-size:.95em;
+  line-height:1.4;
+}
+
+/* Carrusel horizontal */
+.spots-scroller{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:4px 2px 10px;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+.spots-scroller::-webkit-scrollbar{height:8px}
+.spots-scroller::-webkit-scrollbar-track{background:rgba(255,255,255,.08);border-radius:20px}
+.spots-scroller::-webkit-scrollbar-thumb{background:rgba(0,255,136,.45);border-radius:20px}
+
+.spot-card{
+  flex:0 0 310px;
+  scroll-snap-align:start;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(0,255,136,.18);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 0 14px rgba(0,255,136,.08);
+  display:flex;
+  flex-direction:column;
+}
+.spot-img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.spot-body{
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.spot-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  width:max-content;
+  max-width:100%;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.78em;
+  color:#d7ffef;
+  border:1px solid rgba(0,255,136,.25);
+  background:rgba(0,255,136,.08);
+}
+.spot-title{
+  color:#fff;
+  font-weight:700;
+  font-size:1.02em;
+  line-height:1.25;
+}
+.spot-text{
+  color:#e9fff8;
+  opacity:.9;
+  font-size:.9em;
+  line-height:1.4;
+  min-height:56px;
+}
+.spot-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.spot-meta span{
+  color:#cffff0;
+  font-size:.77em;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+}
+.spot-actions{
+  display:flex;
+  gap:8px;
+  margin-top:2px;
+}
+.spot-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-decoration:none;
+  border:none;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:.9em;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.spot-btn:hover{transform:translateY(-1px)}
+.spot-btn.ig{
+  background:linear-gradient(135deg,#ff3ea5,#b400ff);
+  color:#fff;
+  box-shadow:0 0 12px rgba(255,0,170,.25);
+}
+.spot-btn.secondary{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* Bloque pauta */
+.ads-box{
+  text-align:center;
+}
+.ads-box h3{
+  color:#00ffcc;
+  font-size:1.25em;
+  margin-bottom:8px;
+  text-shadow:0 0 8px rgba(0,255,170,.45);
+}
+.ads-box p{
+  color:#fff;
+  opacity:.92;
+  line-height:1.45;
+  font-size:.95em;
+  max-width:700px;
+  margin:0 auto 14px;
+}
+.ads-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#25D366,#13b851);
+  color:#042113;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 0 14px rgba(37,211,102,.35);
+  transition:transform .2s ease;
+}
+.ads-cta:hover{transform:scale(1.03)}
+.ads-note{
+  margin-top:10px;
+  color:#d9fff0;
+  opacity:.75;
+  font-size:.84em;
+}
+
+/* FOOTER */
+.footer-ciborg{
+  margin-top:55px;
+  padding:12px 0;
+  background:rgba(0,0,0,0.55);
+  border-radius:10px;
+  color:#00ffcc;
+  font-weight:600;
+  font-size:1.15em;
+  text-decoration:none;
+  display:block;
+  width:100%;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+  box-shadow:0 0 12px #00ffaa;
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .logo{width:220px}
+  .title{font-size:1.7em;margin-top:6px}
+  .radio-box{padding:25px 14px}
+  .play-btn{padding:13px 20px;font-size:1.06em;width:100%}
+  .share-btn{padding:11px 16px;font-size:1em;width:100%}
+  .spot-card{flex-basis:84vw}
+  .spot-img{height:160px}
+}
+@media(max-width:800px){
+  .logo{width:240px}
+}
+@media(min-width:1200px){
+  .logo{width:300px}
+  .title{font-size:2.4em;margin-top:4px}
+}
+@media(min-width:1600px){
+  .logo{width:330px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP INFO -->
+<div class="top-info">
+  <div class="clima-line" id="clima">Cargando clima...</div>
+  <div class="hora-line" id="hora"></div>
+  <div class="hora-line" id="fecha"></div>
+</div>
+
+<!-- RADIO -->
+<div class="radio-box">
+
+  <img src="https://iili.io/fIqhMwQ.webp" class="logo" alt="Logo Radio Cannafest">
+
+  <h1 class="title">Música que fluye. Vibra que conecta.</h1>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <span>🎧👽Música – Cultura – Vibra – 24hs • Radio Cannafest🔴🟡🟢</span>
+  </div>
+
+  <div class="en-vivo"><div class="dot"></div> EN VIVO</div>
+
+  <!-- NUEVO: OYENTES DINÁMICOS -->
+  <div class="listeners-box">
+    <div class="listeners-chip">
+      <span class="pulse-eye"></span>
+      Oyentes en este momento: <span id="listenersCount">247</span>
+    </div>
+    <div class="listeners-sub" id="listenersTrend">Actualizando en tiempo real...</div>
+  </div>
+
+  <audio id="radioPlayer" preload="none" src="https://usa15.fastcast4u.com/proxy/ciborg347?mp=/1"></audio>
+
+  <button class="play-btn" id="playBtn" onclick="toggleRadio()">▶ Escuchar radio</button>
+
+  <button class="share-btn" onclick="shareRadio()">📲 Compartir Radio Cannafest</button>
+
+  <div id="playerStatus" style="color:#fff;margin-top:10px;opacity:.9;">
+    ⏸ La radio está detenida👮🏻‍♂️😖.
+  </div>
+
+  <!-- BOTÓN PARA INSTALAR LA APP -->
+  <button id="installBtn" style="
+    background:#00ff88;
+    color:#000;
+    padding:12px 25px;
+    border-radius:30px;
+    font-size:1.1em;
+    border:none;
+    margin-top:25px;
+    cursor:pointer;
+    display:none;
+    box-shadow:0 0 12px #00ff88;
+  ">
+  📲 Instalar Radio Cannafest🙌🏻
+  </button>
+
+</div>
+
+<!-- INSTAGRAM -->
+<div class="insta-box">
+  <h2 class="insta-title">Instagram Oficial</h2>
+  <a href="https://www.instagram.com/cannafest2025" target="_blank" class="insta-link" rel="noopener noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="insta-logo" alt="Instagram">
+    @cannafest2025
+  </a>
+</div>
+
+<!-- NUEVO: EMPRENDIMIENTOS / SPOTS (carrusel horizontal) -->
+<div class="spots-wrap">
+  <section class="section-neon">
+    <h2 class="section-title">Emprendimientos y spots de la comunidad</h2>
+    <p class="section-sub">Espacio publicitario para marcas, ferias y proyectos que acompañan Radio Cannafest.</p>
+
+    <div class="spots-scroller" aria-label="Carrusel de emprendimientos y spots publicitarios">
+
+      <!-- MATU GRINDERS -->
+      <article class="spot-card">
+        <img class="spot-img" src="https://iili.io/qKLurDF.jpg" alt="Matu Grinders" loading="lazy">
+        <div class="spot-body">
+          <span class="spot-badge">Emprendimiento destacado</span>
+          <h3 class="spot-title">Matu Grinders</h3>
+          <p class="spot-text">Grinders y accesorios para la comunidad. Mirá modelos, novedades y consultas desde su Instagram.</p>
+          <div class="spot-meta">
+            <span>Accesorios</span>
+            <span>Comunidad</span>
+            <span>IG directo</span>
+          </div>
+          <div class="spot-actions">
+            <a class="spot-btn ig" href="https://www.instagram.com/matu_grinders?igsh=MWJrNHo1eHBybGp3cg==" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- JAH ROOTS SUR FERIA (segunda foto) -->
+      <article class="spot-card">
+        <img class="spot-img" src="https://iili.io/qKLuPVa.jpg" alt="JAH ROOTS SUR FERIA" loading="lazy">
+        <div class="spot-body">
+          <span class="spot-badge">Evento / Convocatoria</span>
+          <h3 class="spot-title">JAH ROOTS SUR FERIA | Convocatoria a feriantes</h3>
+          <p class="spot-text">Feria en Wilde con música, DJ y comunidad. Reserva tu lugar y participá con tu emprendimiento en Bar Mandrágora.</p>
+          <div class="spot-meta">
+            <span>Wilde</span>
+            <span>Stand desde $15.000</span>
+            <span>15 a 21 hs</span>
+          </div>
+          <div class="spot-actions">
+            <a class="spot-btn ig" href="https://www.instagram.com/jahrootssur/" target="_blank" rel="noopener noreferrer">Ver Instagram / Reservar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- CIBORG 347 -->
+      <article class="spot-card">
+        <img class="spot-img" src="https://iili.io/qKLu6og.jpg" alt="CIBORG 347" loading="lazy">
+        <div class="spot-body">
+          <span class="spot-badge">Servicios digitales</span>
+          <h3 class="spot-title">CIBORG 347 | Sitios web y diseño</h3>
+          <p class="spot-text">Trabajo creando y diseñando sitios web simples y profesionales para emprendimientos, marcas y proyectos.</p>
+          <div class="spot-meta">
+            <span>Webs</span>
+            <span>Diseño</span>
+            <span>Landing pages</span>
+          </div>
+          <div class="spot-actions">
+            <a class="spot-btn ig" href="https://www.instagram.com/ciborg347" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- NUEVO: BLOQUE PAUTA EN RADIO -->
+  <section class="section-neon ads-box">
+    <h3>Publicitá en Radio Cannafest</h3>
+    <p>
+      Spots grabados + banner en la web para emprendimientos y marcas. Si querés pautar en la radio, comunicate por WhatsApp y consultá disponibilidad.
+    </p>
+    <a class="ads-cta" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer">
+      💬 Consultar pauta por WhatsApp
+    </a>
+    <div class="ads-note">Radio Cannafest • Espacio para difusión de emprendimientos, eventos y marcas amigas.</div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<a class="footer-ciborg" href="https://ciborg347.onrender.com" target="_blank" rel="noopener noreferrer">
+  Creado y diseñado por Ciborg347™
+</a>
+
+<!-- SCRIPTS -->
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js");
+}
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "inline-block";
+});
+
+installBtn.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+  const choice = await deferredPrompt.userChoice;
+
+  deferredPrompt = null;
+  installBtn.style.display = "none";
+});
+
+/* RADIO */
+const audio=document.getElementById("radioPlayer");
+const btn=document.getElementById("playBtn");
+const statusEl=document.getElementById("playerStatus");
+let playing=false;
+
+function toggleRadio(){
+  if(!playing){
+    audio.load();
+    audio.play().then(()=>{
+      playing=true;
+      btn.textContent="⏸ Detener radio";
+      statusEl.textContent="🎧 😎Reproduciendo🎶🤙🏻...";
+    }).catch(()=>{
+      statusEl.textContent="⚠ Tocá nuevamente para iniciar";
+    });
+  } else {
+    audio.pause();
+    playing=false;
+    btn.textContent="▶ Escuchar radio";
+    statusEl.textContent="⏸ La radio está detenida😳😵.";
+  }
+}
+
+function shareRadio(){
+  const text="🎧 Escuchá Radio Cannafest: música, difusión y buena onda!";
+  const url="https://radio-cannafest.onrender.com";
+
+  if(navigator.share){
+    navigator.share({title:"Radio Cannafest",text,url});
+  } else {
+    alert("Copiá y compartí:\n"+text+"\n"+url);
+  }
+}
+
+function actHora(){
+  let n=new Date();
+  document.getElementById("hora").textContent=n.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+  document.getElementById("fecha").textContent=n.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"});
+}
+setInterval(actHora,1000);actHora();
+
+async function cargarClima(){
+  try{
+    let ip=await fetch("https://ipapi.co/json/").then(r=>r.json());
+    let r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ip.latitude}&longitude=${ip.longitude}&current_weather=true`).then(x=>x.json());
+    let t=r.current_weather.temperature;
+    let c=r.current_weather.weathercode;
+
+    let icon="☀️", est="Despejado";
+    if(c>=45&&c<=48){icon="🌫️";est="Niebla"}
+    if(c>=51&&c<=57){icon="🌦️";est="Llovizna"}
+    if(c>=61&&c<=67){icon="🌧️";est="Lluvia"}
+    if(c>=71&&c<=77){icon="❄️";est="Nieve"}
+    if(c>=80&&c<=82){icon="🌧️";est="Chaparrones"}
+    if(c>=95){icon="⛈️";est="Tormenta"}
+
+    document.getElementById("clima").textContent=`${icon} ${ip.city} – ${t}°C – ${est}`;
+  }catch{
+    document.getElementById("clima").textContent="Clima no disponible";
+  }
+}
+cargarClima();
+
+/* ===== NUEVO: OYENTES DINÁMICOS CON PERSISTENCIA (suave) ===== */
+(function(){
+  const countEl = document.getElementById("listenersCount");
+  const trendEl = document.getElementById("listenersTrend");
+  if(!countEl) return;
+
+  const STORAGE_KEY = "cannafest_listeners_state_v1";
+
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+  function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+  function getHourProfile(hour){
+    // Rangos por horario (graduales). Noche algo más alta, madrugada puede bajar.
+    if(hour >= 0 && hour < 3)  return { min:120, max:240, idealMin:150, idealMax:220, changeEveryMs:9000, maxStep:2 };
+    if(hour >= 3 && hour < 6)  return { min:50,  max:180, idealMin:80,  idealMax:150, changeEveryMs:10000, maxStep:2 };
+    if(hour >= 6 && hour < 10) return { min:140, max:260, idealMin:180, idealMax:240, changeEveryMs:8000, maxStep:2 };
+    if(hour >= 10 && hour < 14)return { min:180, max:320, idealMin:220, idealMax:290, changeEveryMs:7000, maxStep:3 };
+    if(hour >= 14 && hour < 18)return { min:170, max:330, idealMin:210, idealMax:300, changeEveryMs:6500, maxStep:3 };
+    if(hour >= 18 && hour < 22)return { min:220, max:373, idealMin:255, idealMax:345, changeEveryMs:6000, maxStep:3 };
+    return { min:190, max:340, idealMin:230, idealMax:310, changeEveryMs:7000, maxStep:3 }; // 22 a 24
+  }
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return null;
+      const data = JSON.parse(raw);
+      if(typeof data.count !== "number") return null;
+      return data;
+    }catch{
+      return null;
+    }
+  }
+
+  function saveState(state){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }catch(e){}
+  }
+
+  const now = new Date();
+  const profile = getHourProfile(now.getHours());
+  const existing = loadState();
+
+  let state = existing || {
+    count: randInt(profile.idealMin, profile.idealMax),
+    lastTs: Date.now(),
+    trend: "estable"
+  };
+
+  // Si recargan y quedó fuera del rango actual, lo corregimos suave, no brusco.
+  state.count = clamp(Math.round(state.count), profile.min, profile.max);
+
+  function updateTrendLabel(delta){
+    if(delta > 0) return "Subiendo de a poco 📈";
+    if(delta < 0) return "Bajando suave 📉";
+    return "Estable ✨";
+  }
+
+  function tickListeners(){
+    const d = new Date();
+    const p = getHourProfile(d.getHours());
+
+    let delta = 0;
+    const center = Math.round((p.idealMin + p.idealMax) / 2);
+    const distanceToCenter = state.count - center;
+
+    // Tendencia según zona del rango ideal
+    if(state.count < p.idealMin){
+      delta = randInt(1, Math.min(p.maxStep, 2));
+    } else if(state.count > p.idealMax){
+      delta = -randInt(1, Math.min(p.maxStep, 2));
+    } else {
+      // Dentro del rango ideal: pequeñas fluctuaciones
+      const roll = Math.random();
+      if(roll < 0.34) delta = 0;
+      else if(roll < 0.67) delta = (Math.random() < 0.5 ? -1 : 1);
+      else delta = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.15 ? 2 : 1);
+    }
+
+    // Evitar saltos bruscos en extremos y ayudar a estabilizar
+    if(distanceToCenter > 40 && delta > 0) delta = 0;
+    if(distanceToCenter < -40 && delta < 0) delta = 0;
+
+    // Cambios un poco más suaves de madrugada
+    if(d.getHours() >= 3 && d.getHours() < 6 && Math.abs(delta) > 1){
+      delta = delta > 0 ? 1 : -1;
+    }
+
+    state.count = clamp(state.count + delta, p.min, p.max);
+    state.lastTs = Date.now();
+    state.trend = updateTrendLabel(delta);
+
+    countEl.textContent = state.count;
+    if(trendEl) trendEl.textContent = state.trend;
+    saveState(state);
+
+    // Reprogramar con cadencia según horario
+    clearTimeout(window.__listenersTimer);
+    window.__listenersTimer = setTimeout(tickListeners, p.changeEveryMs + randInt(-900, 1200));
+  }
+
+  // Pintado inicial
+  countEl.textContent = state.count;
+  if(trendEl) trendEl.textContent = "Actualizando en tiempo real...";
+  saveState(state);
+
+  // Arranque
+  setTimeout(tickListeners, 1800);
+})();
+</script>
+
+</body>
+</html>
