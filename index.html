@@ -1,4 +1,4 @@
-
+```html id="64218"
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -635,6 +635,10 @@ audio{width:100%;max-width:580px}
   background:#25D366;
   box-shadow:0 10px 24px rgba(37,211,102,.35);
   border:1px solid rgba(255,255,255,.2);
+  transition:bottom .22s ease, transform .18s ease;
+}
+.floating-wa.footer-safe{
+  bottom:84px;
 }
 .floating-wa svg{width:28px;height:28px;fill:#fff;display:block}
 
@@ -1323,7 +1327,7 @@ temaForm.addEventListener("submit", function(e){
   window.open(waUrl, "_blank", "noopener,noreferrer");
 });
 
-/* CARRUSEL SPONSORS AUTO (solo mobile) */
+/* CARRUSEL SPONSORS AUTO (solo mobile, recorre TODAS las tarjetas y recien vuelve) */
 (function initSponsorsAutoCarousel(){
   const track = document.querySelector(".brands-track");
   if(!track) return;
@@ -1331,42 +1335,71 @@ temaForm.addEventListener("submit", function(e){
   let autoTimer = null;
   let resumeTimer = null;
   let isUserInteracting = false;
+  let currentIndex = 0;
+  let totalCards = 0;
 
   function isMobile(){
     return window.matchMedia("(max-width: 680px)").matches;
   }
 
-  function getStep(){
-    const firstCard = track.querySelector(".brand-card");
-    if(!firstCard) return Math.floor(track.clientWidth * 0.9);
-    const styles = getComputedStyle(track);
-    const gap = parseFloat(styles.columnGap || styles.gap || 12) || 12;
-    return Math.round(firstCard.getBoundingClientRect().width + gap);
+  function cards(){
+    return Array.from(track.querySelectorAll(".brand-card"));
   }
 
-  function maxScroll(){
-    return Math.max(0, track.scrollWidth - track.clientWidth);
+  function refreshMetrics(){
+    totalCards = cards().length;
+  }
+
+  function scrollToIndex(index){
+    const list = cards();
+    if(!list.length) return;
+    const safeIndex = Math.max(0, Math.min(index, list.length - 1));
+    const card = list[safeIndex];
+    track.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
+    currentIndex = safeIndex;
   }
 
   function nextSlide(){
     if(!isMobile() || isUserInteracting) return;
 
-    const step = getStep();
-    const end = maxScroll();
-    const next = track.scrollLeft + step;
+    refreshMetrics();
+    if(totalCards <= 1) return;
 
-    if(next >= end - 8){
-      track.scrollTo({ left: 0, behavior: "smooth" });
+    if(currentIndex < totalCards - 1){
+      scrollToIndex(currentIndex + 1);
     } else {
-      track.scrollTo({ left: next, behavior: "smooth" });
+      stopAuto();
+      setTimeout(() => {
+        if(!isMobile() || isUserInteracting) return;
+        scrollToIndex(0);
+        setTimeout(() => {
+          if(!isMobile() || isUserInteracting) return;
+          startAuto();
+        }, 900);
+      }, 1200);
     }
   }
 
   function startAuto(){
     stopAuto();
     if(!isMobile()) return;
+
     track.classList.add("auto-scrolling");
-    autoTimer = setInterval(nextSlide, 2800);
+    refreshMetrics();
+
+    const list = cards();
+    if(list.length){
+      let nearest = 0;
+      let minDist = Infinity;
+      const left = track.scrollLeft;
+      list.forEach((card, i) => {
+        const d = Math.abs(card.offsetLeft - left);
+        if(d < minDist){ minDist = d; nearest = i; }
+      });
+      currentIndex = nearest;
+    }
+
+    autoTimer = setInterval(nextSlide, 1700);
   }
 
   function stopAuto(){
@@ -1380,10 +1413,23 @@ temaForm.addEventListener("submit", function(e){
     isUserInteracting = true;
     stopAuto();
     if(resumeTimer) clearTimeout(resumeTimer);
+
+    const list = cards();
+    if(list.length){
+      let nearest = 0;
+      let minDist = Infinity;
+      const left = track.scrollLeft;
+      list.forEach((card, i) => {
+        const d = Math.abs(card.offsetLeft - left);
+        if(d < minDist){ minDist = d; nearest = i; }
+      });
+      currentIndex = nearest;
+    }
+
     resumeTimer = setTimeout(() => {
       isUserInteracting = false;
       startAuto();
-    }, 3500);
+    }, 3200);
   }
 
   ["touchstart","pointerdown","mousedown","wheel"].forEach(evt => {
@@ -1397,6 +1443,7 @@ temaForm.addEventListener("submit", function(e){
   window.addEventListener("resize", () => {
     if(resumeTimer) clearTimeout(resumeTimer);
     isUserInteracting = false;
+    refreshMetrics();
     startAuto();
   });
 
@@ -1408,9 +1455,33 @@ temaForm.addEventListener("submit", function(e){
     }
   });
 
+  refreshMetrics();
   startAuto();
+})();
+
+/* BOTON WHATSAPP NO TAPA FOOTER */
+(function waNoTapeFooter(){
+  const waBtn = document.querySelector(".floating-wa");
+  const footer = document.querySelector(".footer-ciborg");
+  if(!waBtn || !footer) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        waBtn.classList.add("footer-safe");
+      } else {
+        waBtn.classList.remove("footer-safe");
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.15
+  });
+
+  observer.observe(footer);
 })();
 </script>
 
 </body>
 </html>
+```
