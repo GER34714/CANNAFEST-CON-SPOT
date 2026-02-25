@@ -209,19 +209,7 @@ img{max-width:100%;display:block}
   font-weight:700;
   font-size:1.1rem;
 }
-.now-song-box{
-  min-width:0;
-}
-.now-real,.now-fallback{
-  display:block;
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.now-fallback{display:none}
-.now-real.hidden{display:none}
-.now-fallback.show{display:block}
+
 audio{width:100%;max-width:580px}
 
 /* BUTTONS */
@@ -696,16 +684,9 @@ audio{width:100%;max-width:580px}
     </div>
 
     <div class="mini-card">
-      <div class="mini-label">Ahora suena</div>
-      <div class="mini-value now-song-box">
-        <!-- Metadata real (NO tocar con JS) -->
-        <span class="now-real" id="nowRealWrap">
-          <span class="cc_streaminfo" data-type="song" data-username="ciborg347" id="centovaSong">Loading ...</span>
-        </span>
-        <!-- Fallback fake separado -->
-        <span class="now-fallback" id="nowFallback">Cargando...</span>
-      </div>
-      <div class="mini-label" id="nowPlayingMeta" style="margin-top:4px">Intentando metadata real...</div>
+      <div class="mini-label">Comunidad activa</div>
+      <div class="mini-value">Pedidos musicales por WhatsApp</div>
+      <div class="mini-label" style="margin-top:4px">Participá en vivo desde la web</div>
     </div>
 
     <div class="mini-card">
@@ -817,7 +798,6 @@ audio{width:100%;max-width:580px}
 
     <div class="feature-event">
       <div class="feature-image">
-        <!-- JAH ROOTS (corregido) -->
         <img src="https://iili.io/qKLurDF.jpg" alt="Jah Roots Sur Feria en Wilde">
       </div>
 
@@ -857,7 +837,6 @@ audio{width:100%;max-width:580px}
       <!-- CIBORG -->
       <article class="brand-card">
         <div class="brand-img">
-          <!-- CIBORG (corregido) -->
           <img src="https://iili.io/qKLuPVa.jpg" alt="CIBORG 347">
         </div>
         <div class="brand-body">
@@ -1001,9 +980,6 @@ audio{width:100%;max-width:580px}
 <a class="floating-wa" href="https://wa.me/message/KPWJHN63WA3MA1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de la radio">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.47 0 .09 5.36.09 11.96c0 2.11.55 4.18 1.6 6.01L0 24l6.2-1.62a11.92 11.92 0 0 0 5.87 1.5h.01c6.59 0 11.97-5.36 11.97-11.96c0-3.2-1.25-6.2-3.53-8.44ZM12.08 21.86h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.68.96.98-3.59-.23-.37a9.9 9.9 0 0 1-1.53-5.31c0-5.48 4.46-9.94 9.95-9.94c2.66 0 5.15 1.03 7.03 2.9a9.85 9.85 0 0 1 2.92 7.03c0 5.48-4.47 9.94-9.95 9.94Zm5.45-7.42c-.3-.15-1.79-.88-2.07-.98c-.28-.1-.48-.15-.68.15c-.2.3-.78.98-.95 1.18c-.18.2-.35.23-.65.08c-.3-.15-1.25-.46-2.39-1.47c-.89-.79-1.49-1.76-1.66-2.06c-.18-.3-.02-.46.13-.61c.14-.14.3-.35.45-.53c.15-.18.2-.3.3-.5c.1-.2.05-.38-.03-.53c-.08-.15-.68-1.65-.93-2.25c-.25-.61-.5-.52-.68-.53h-.58c-.2 0-.53.08-.8.38c-.28.3-1.05 1.03-1.05 2.51s1.08 2.92 1.23 3.12c.15.2 2.12 3.24 5.13 4.54c.72.31 1.28.49 1.72.62c.72.23 1.38.2 1.9.12c.58-.09 1.79-.73 2.05-1.44c.25-.71.25-1.31.18-1.44c-.08-.13-.28-.2-.58-.35Z"/></svg>
 </a>
-
-<!-- Script de metadata real (Centova/FastCast4u) -->
-<script src="https://usa15.fastcast4u.com/system/streaminfo.js"></script>
 
 <script>
 /* SERVICE WORKER / PWA */
@@ -1171,69 +1147,6 @@ function tickOyentes(){
 }
 initOyentes();
 setInterval(tickOyentes, 9000);
-
-/* AHORA SUENA: metadata real (Centova) + fallback fake SEPARADO */
-const centovaSong = document.getElementById("centovaSong");
-const nowRealWrap = document.getElementById("nowRealWrap");
-const nowFallback = document.getElementById("nowFallback");
-const nowPlayingMeta = document.getElementById("nowPlayingMeta");
-
-let usingFallback = false;
-const nowTracks = [
-  {title:"Reggae Roots Selection", meta:"Bloque Mañana"},
-  {title:"Dub & Bass Vibes", meta:"Sesión Cannafest"},
-  {title:"Clásicos del roots", meta:"Rotación"},
-  {title:"Urban / fusión", meta:"Bloque Tarde"},
-  {title:"Set nocturno", meta:"Radio Cannafest"},
-  {title:"Mística de madrugada", meta:"Flow continuo"},
-  {title:"Comunidad al aire", meta:"Pedidos musicales"}
-];
-
-function isValidCentovaText(txt){
-  const t = (txt || "").trim();
-  if(!t) return false;
-  if(/loading/i.test(t)) return false;
-  if(/cargando/i.test(t)) return false;
-  if(t === "..." || t.length < 2) return false;
-  return true;
-}
-
-function activateFallback(){
-  usingFallback = true;
-  nowRealWrap.classList.add("hidden");
-  nowFallback.classList.add("show");
-  nowPlayingMeta.textContent = "Metadata real no disponible (fallback visual)";
-  updateNowPlayingFallback();
-}
-
-function restoreRealMetadata(){
-  usingFallback = false;
-  nowRealWrap.classList.remove("hidden");
-  nowFallback.classList.remove("show");
-  nowPlayingMeta.textContent = "Metadata real del stream";
-}
-
-function updateNowPlayingFallback(){
-  if(!usingFallback) return;
-  const slot = Math.floor(Date.now() / (1000 * 60 * 7));
-  const t = nowTracks[slot % nowTracks.length];
-  nowFallback.textContent = t.title;
-}
-
-function checkCentovaSong(){
-  const t = centovaSong ? centovaSong.textContent : "";
-  if(isValidCentovaText(t)){
-    restoreRealMetadata();
-    return true;
-  }
-  return false;
-}
-
-/* Espera breve a que streaminfo.js rellene el span */
-setTimeout(() => { if(!checkCentovaSong()) activateFallback(); }, 2500);
-setTimeout(() => { checkCentovaSong(); }, 5000);
-/* Si en algún momento empieza a responder, vuelve a metadata real */
-setInterval(() => { if(!checkCentovaSong()) updateNowPlayingFallback(); }, 8000);
 
 /* PEDIDOS MUSICALES ROTATIVOS (SOLO 3 Y MEZCLADOS) */
 const pedidosData = [
